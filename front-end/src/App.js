@@ -13,7 +13,7 @@ const App = () => {
   const [clothes, setClothes] = useState([])
   // show
   const [showAddForm, setShowAddForm] = useState(false);
-  const [showEdit, setShowEdit] = useState(false)
+  // const [showEdit, setShowEdit] = useState(false)
   // new Cloth
   const [newName, setNewName] = useState('')
   const [newPrice, setNewPrice] = useState()
@@ -21,6 +21,13 @@ const App = () => {
   const [newImage, setNewImage] = useState('')
   const [newLink, setNewLink] = useState('')
   const [newType, setNewType] = useState('')
+  // update
+  const [updatedName, setUpdatedName] = useState()
+  const [updatedPrice, setUpdatedPrice] = useState()
+  const [updatedStore, setUpdatedStore] = useState()
+  const [updatedImage, setUpdatedImage] = useState()
+  const [updatedLink, setUpdatedLink] = useState()
+  const [updatedType, setUpdatedType] = useState()
 
 // ==========
 // get functions
@@ -29,9 +36,9 @@ const getAddForm = () => {
   setShowAddForm(!showAddForm)
 }
 
-const getShowEdit = () => {
-  setShowEdit(!showEdit)
-}
+// const getShowEdit = () => {
+//   setShowEdit(!showEdit)
+// }
 
 // ==========
 // NEW FORM
@@ -82,8 +89,68 @@ const getShowEdit = () => {
     })
   }
 
+  // ========
+  // UPDATE
+  // ========
+  const handleUpdatedName = (event) => {
+    setUpdatedName(event.target.value)
+  }
 
+  const handleUpdatedPrice = (event) => {
+    setUpdatedPrice(event.target.value)
+  }
 
+  const handleUpdatedStore = (event) => {
+    setUpdatedStore(event.target.value)
+  }
+
+  const handleUpdatedImage = (event) => {
+    setUpdatedImage(event.target.value)
+  }
+
+  const handleUpdatedLink = (event) => {
+    setUpdatedLink(event.target.value)
+  }
+
+  const handleUpdatedType = (event) => {
+    setUpdatedType(event.target.value)
+  }
+
+  const handleUpdate = (clothesData) => {
+    axios
+      .put(
+        `http://localhost:3000/boutique/${clothesData._id}`,
+        {
+          name: updatedName,
+          price: updatedPrice,
+          store: updatedStore,
+          image: updatedImage,
+          link: updatedLink,
+          type: updatedType
+        }
+      ).then((response) => {
+        axios
+          .get('http://localhost:3000/boutique')
+          .then((response) => {
+            setClothes(response.data)
+          })
+      })
+  }
+
+  // ========
+  // DELETE
+  // ========
+  const handleDelete = (clothesData) => {
+    axios
+        .delete(`http://localhost:3000/boutique/${clothesData._id}`)
+        .then(() => {
+          axios
+              .get('http://localhost:3000/boutique')
+              .then((response) => {
+                setClothes(response.data)
+              })
+        })
+  }
 
 
 
@@ -148,7 +215,7 @@ const getShowEdit = () => {
         {
           clothes.map((clothes) => {
             return(
-              <Clothes clothes={clothes} getShowEdit={getShowEdit} showEdit={showEdit}></Clothes>
+              <Clothes clothes={clothes} handleUpdate={handleUpdate} handleUpdatedName={handleUpdatedName} handleUpdatedPrice={handleUpdatedPrice} handleUpdatedStore={handleUpdatedStore} handleUpdatedImage={handleUpdatedImage} handleUpdatedLink={handleUpdatedLink} handleUpdatedType={handleUpdatedType} handleDelete={handleDelete}></Clothes>
             )
           })
         }
