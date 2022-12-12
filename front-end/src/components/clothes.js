@@ -25,12 +25,14 @@ const Clothes = (props) => {
                   <h2>{props.clothes.store}</h2>
                   <img src={props.clothes.image} className="card-img-top" onClick={showDescription}></img>
                   <div className='card-body'>
-                    <h5 className="card-title">{props.clothes.name}</h5>
+                    <h5 className="card-title" onClick={showDescription}>{props.clothes.name}</h5>
                     {showInfo ? <div>
                       <h5>{props.clothes.type}</h5>
                       <p className='card-text'>${props.clothes.price}</p>
                       <a href={props.clothes.link} className='btn btn-success'>Ready to Buy?</a>
-                      <button className='btn btn-danger'>Delete</button>
+                      <button className='btn btn-danger' onClick={(event) => {
+                        props.handleDelete(props.clothes)
+                      }}>Delete</button>
                       <button className='btn btn-danger' data-bs-toggle="modal" data-bs-target="#exampleModal" onClick={getShowEdit}>Edit</button>
                     </div> : <></>}
                     
