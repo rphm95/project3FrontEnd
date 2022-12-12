@@ -2,6 +2,7 @@ import logo from './logo.svg';
 import './App.css';
 import {useState, useEffect} from 'react'
 import axios from 'axios'
+import Clothes from './components/clothes'
 
 const App = () => {
 
@@ -12,6 +13,7 @@ const App = () => {
   const [clothes, setClothes] = useState([])
   // show
   const [showAddForm, setShowAddForm] = useState(false);
+  const [showEdit, setShowEdit] = useState(false)
   // new Cloth
   const [newName, setNewName] = useState('')
   const [newPrice, setNewPrice] = useState()
@@ -25,6 +27,10 @@ const App = () => {
 // ==========
 const getAddForm = () => {
   setShowAddForm(!showAddForm)
+}
+
+const getShowEdit = () => {
+  setShowEdit(!showEdit)
 }
 
 // ==========
@@ -138,6 +144,15 @@ const getAddForm = () => {
         </div>
        </>  
       : null }
+      <div className="row row-cols-2 row-cols-md-3 g-4" >
+        {
+          clothes.map((clothes) => {
+            return(
+              <Clothes clothes={clothes} getShowEdit={getShowEdit} showEdit={showEdit}></Clothes>
+            )
+          })
+        }
+      </div>
 
 
     </main>
