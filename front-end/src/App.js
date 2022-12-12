@@ -21,6 +21,13 @@ const App = () => {
   const [newImage, setNewImage] = useState('')
   const [newLink, setNewLink] = useState('')
   const [newType, setNewType] = useState('')
+  // update
+  const [updatedName, setUpdatedName] = useState('')
+  const [updatedPrice, setUpdatedPrice] = useState()
+  const [updatedStore, setUpdatedStore] = useState('')
+  const [updatedImage, setUpdatedImage] = useState('')
+  const [updatedLink, setUpdatedLink] = useState('')
+  const [updatedType, setUpdatedType] = useState('')
 
 // ==========
 // get functions
@@ -80,6 +87,54 @@ const getShowEdit = () => {
           setClothes(response.data)
         })
     })
+  }
+
+  // ========
+  // UPDATE
+  // ========
+  const handleUpdatedName = (event) => {
+    setUpdatedName(event.target.value)
+  }
+
+  const handleUpdatedPrice = (event) => {
+    setUpdatedPrice(event.target.value)
+  }
+
+  const handleUpdatedStore = (event) => {
+    setUpdatedStore(event.target.value)
+  }
+
+  const handleUpdatedImage = (event) => {
+    setUpdatedImage(event.target.value)
+  }
+
+  const handleUpdatedLink = (event) => {
+    setUpdatedLink(event.target.value)
+  }
+
+  const handleUpdatedType = (event) => {
+    setUpdatedType(event.target.value)
+  }
+
+  const handleUpdate = (clothesData) => {
+    axios
+      .put(
+        `http://localhost:3000/boutique/${clothesData._id}`,
+        {
+          name: updatedName ? updatedName : clothesData.name,
+          price: updatedPrice ? updatedPrice : clothesData.price,
+          store: updatedStore ? updatedStore : clothesData.store,
+          image: updatedImage ? updatedImage : clothesData.image,
+          link: updatedLink ? updatedLink : clothesData.link,
+          type: updatedType ? updatedType : clothesData.type
+        }
+      ).then((response) => {
+        axios
+          .get('http://localhost:3000/boutique')
+          .then((response) => {
+            setClothes(response.data)
+          })
+      })
   }
 
 
@@ -148,7 +203,7 @@ const getShowEdit = () => {
         {
           clothes.map((clothes) => {
             return(
-              <Clothes clothes={clothes} getShowEdit={getShowEdit} showEdit={showEdit}></Clothes>
+              <Clothes clothes={clothes} getShowEdit={getShowEdit} showEdit={showEdit} handleUpdate={handleUpdate} handleUpdatedName={handleUpdatedName} handleUpdatedPrice={handleUpdatedPrice} handleUpdatedStore={handleUpdatedStore} handleUpdatedImage={handleUpdatedImage} handleUpdatedLink={handleUpdatedLink} handleUpdatedType={handleUpdatedType}></Clothes>
             )
           })
         }
