@@ -13,7 +13,7 @@ const App = () => {
   const [clothes, setClothes] = useState([])
   // show
   const [showAddForm, setShowAddForm] = useState(false);
-  const [showEdit, setShowEdit] = useState(false)
+  // const [showEdit, setShowEdit] = useState(false)
   // new Cloth
   const [newName, setNewName] = useState('')
   const [newPrice, setNewPrice] = useState()
@@ -36,9 +36,9 @@ const getAddForm = () => {
   setShowAddForm(!showAddForm)
 }
 
-const getShowEdit = () => {
-  setShowEdit(!showEdit)
-}
+// const getShowEdit = () => {
+//   setShowEdit(!showEdit)
+// }
 
 // ==========
 // NEW FORM
@@ -203,7 +203,7 @@ const getShowEdit = () => {
         {
           clothes.map((clothes) => {
             return(
-              <Clothes clothes={clothes} getShowEdit={getShowEdit} showEdit={showEdit} handleUpdate={handleUpdate} handleUpdatedName={handleUpdatedName} handleUpdatedPrice={handleUpdatedPrice} handleUpdatedStore={handleUpdatedStore} handleUpdatedImage={handleUpdatedImage} handleUpdatedLink={handleUpdatedLink} handleUpdatedType={handleUpdatedType}></Clothes>
+              <Clothes clothes={clothes} handleUpdate={handleUpdate} handleUpdatedName={handleUpdatedName} handleUpdatedPrice={handleUpdatedPrice} handleUpdatedStore={handleUpdatedStore} handleUpdatedImage={handleUpdatedImage} handleUpdatedLink={handleUpdatedLink} handleUpdatedType={handleUpdatedType}></Clothes>
             )
           })
         }

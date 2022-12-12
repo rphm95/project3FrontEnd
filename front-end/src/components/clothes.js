@@ -3,10 +3,15 @@ import {useState} from 'react';
 
 const Clothes = (props) => {
     const [showInfo, setShowInfo] = useState(false);
+    const [showEdit, setShowEdit] = useState(false)
+
     const showDescription = () => {
       setShowInfo(!showInfo)
     }
 
+    const getShowEdit = () => {
+      setShowEdit(!showEdit)
+    }
     // const myModal = document.getElementById('myModal')
     // const myInput = document.getElementById('myInput')
 
@@ -26,10 +31,10 @@ const Clothes = (props) => {
                       <p className='card-text'>${props.clothes.price}</p>
                       <a href={props.clothes.link} className='btn btn-success'>Ready to Buy?</a>
                       <button className='btn btn-danger'>Delete</button>
-                      <button className='btn btn-danger' data-bs-toggle="modal" data-bs-target="#exampleModal" onClick={props.getShowEdit}>Edit</button>
+                      <button className='btn btn-danger' data-bs-toggle="modal" data-bs-target="#exampleModal" onClick={getShowEdit}>Edit</button>
                     </div> : <></>}
                     
-                    {props.showEdit ? 
+                    {showEdit ? 
                       <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog">
                           <div class="modal-content">
@@ -68,10 +73,6 @@ const Clothes = (props) => {
                                 <div className="col-md-12">
                                   <label className="form-label">Link to Store Site</label>  
                                   <input type="text" className="form-control" defaultValue={props.clothes.link} onChange={props.handleUpdatedLink} /><br/>
-                                </div>
-                                
-                                <div className="col-md-12"> 
-                                  <input type="submit" className="form-control btn-info" value="Add New Item" />
                                 </div>
 
                               </form>
