@@ -4,6 +4,7 @@ import {useState, useEffect} from 'react'
 import axios from 'axios'
 import Clothes from './components/clothes'
 
+
 const App = () => {
 
   // ========
@@ -213,9 +214,9 @@ const getAddForm = () => {
       : null }
       <div className="row row-cols-2 row-cols-md-3 g-4" >
         {
-          clothes.map((clothes) => {
+          clothes.map((clothes, i) => {
             return(
-              <Clothes clothes={clothes} handleUpdate={handleUpdate} handleUpdatedName={handleUpdatedName} handleUpdatedPrice={handleUpdatedPrice} handleUpdatedStore={handleUpdatedStore} handleUpdatedImage={handleUpdatedImage} handleUpdatedLink={handleUpdatedLink} handleUpdatedType={handleUpdatedType} handleDelete={handleDelete}></Clothes>
+              <Clothes key={i} i={i} clothes={clothes} handleUpdate={handleUpdate} handleUpdatedName={handleUpdatedName} handleUpdatedPrice={handleUpdatedPrice} handleUpdatedStore={handleUpdatedStore} handleUpdatedImage={handleUpdatedImage} handleUpdatedLink={handleUpdatedLink} handleUpdatedType={handleUpdatedType} handleDelete={handleDelete}/>
             )
           })
         }
