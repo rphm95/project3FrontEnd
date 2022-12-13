@@ -126,28 +126,44 @@ const getLogin = () => {
       {
         username: newUser,
         password: newPassword
-      }
+      }, {withCredentials:true}
     ).then(() => {
       axios
         .get('http://localhost:3000/users/new')
         .then((response) => {
-          setUsers(response.data)
+          console.log(response.data)
         })
     })
+    getLogin()
   }
 
   const handleLogin = (event) => {
+    event.preventDefault()
     axios.post(
       'http://localhost:3000/sessions/userLogin',
       {
         username: newUser,
         password: newPassword
-      }
+      }, {withCredentials:true}
+    ).then(() => {
+      axios
+        .get('http://localhost:3000/sessions/new', {withCredentials:true})
+        .then((response) => {
+          console.log(response.data)
+          setUsers(response.data.username)
+        })
+    })
+  }
+
+  const handleSessionsDelete = (event) => {
+    axios.delete(
+      'http://localhost:3000/sessions/', {withCredentials:true}
     ).then(() => {
       axios
         .get('http://localhost:3000/sessions/new')
         .then((response) => {
-          setCurrentUser(response.data)
+          console.log(response)
+          setUsers('')
         })
     })
   }
@@ -223,15 +239,23 @@ const getLogin = () => {
       .then((response) => {
         setClothes(response.data)
       })
+      axios
+      .get('http://localhost:3000/sessions/new', {withCredentials:true})
+      .then((response) => {
+        setUsers(response.data.username)
+        console.log(response.data)
+      })
   }, [])
 
   return (
     <main>
-      <h1>Welcome, {currentUser.username}</h1>
+      <h1>Welcome, {users}</h1>
       <button onClick={getAddForm}>Add Clothes</button>
       <button onClick={getSignUp}>Sign Up</button>
       <button onClick={getLogin}>Login</button>
-      {/* <button onClick={getLogout}>Log Out</button> */}
+      <button onClick={() => {
+        handleSessionsDelete()
+      }}>Log Out</button>
 
       {showSignUp ? 
       <>
