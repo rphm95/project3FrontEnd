@@ -4,6 +4,7 @@ import {useState, useEffect} from 'react'
 import axios from 'axios'
 import Clothes from './components/clothes'
 
+
 const App = () => {
 
   // ========
@@ -13,7 +14,11 @@ const App = () => {
   const [clothes, setClothes] = useState([])
   // show
   const [showAddForm, setShowAddForm] = useState(false);
+  const [showSignUp, setShowSignUp] = useState(false);
+  const [showLogin, setShowLogin] = useState(false);
+
   // const [showEdit, setShowEdit] = useState(false)
+
   // new Cloth
   const [newName, setNewName] = useState('')
   const [newPrice, setNewPrice] = useState()
@@ -21,6 +26,12 @@ const App = () => {
   const [newImage, setNewImage] = useState('')
   const [newLink, setNewLink] = useState('')
   const [newType, setNewType] = useState('')
+
+  const [users, setUsers] = useState([])
+  const [currentUser, setCurrentUser] = useState([])
+  const [newUser, setNewUser] = useState('')
+  const [newPassword, setNewPassword] = useState('')
+
   // update
   const [updatedName, setUpdatedName] = useState()
   const [updatedPrice, setUpdatedPrice] = useState()
@@ -34,6 +45,18 @@ const App = () => {
 // ==========
 const getAddForm = () => {
   setShowAddForm(!showAddForm)
+}
+
+const getSignUp = () => {
+  setShowSignUp(!showSignUp)
+  setShowAddForm(false)
+  setShowLogin(false)
+}
+
+const getLogin = () => {
+  setShowLogin(!showLogin)
+  setShowAddForm(false)
+  setShowSignUp(false)
 }
 
 // const getShowEdit = () => {
@@ -67,6 +90,14 @@ const getAddForm = () => {
     setNewType(event.target.value)
   }
 
+  const handleNewUsername = (event) => {
+    setNewUser(event.target.value)
+  }
+
+  const handleNewPassword = (event) => {
+    setNewPassword(event.target.value)
+  }
+
   // handle new form
   const handleNewClothes = (event) => {
     event.preventDefault()
@@ -85,6 +116,38 @@ const getAddForm = () => {
         .get('http://localhost:3000/boutique')
         .then((response) => {
           setClothes(response.data)
+        })
+    })
+  }
+
+  const handleNewUser = (event) => {
+    axios.post(
+      'http://localhost:3000/users/new',
+      {
+        username: newUser,
+        password: newPassword
+      }
+    ).then(() => {
+      axios
+        .get('http://localhost:3000/users/new')
+        .then((response) => {
+          setUsers(response.data)
+        })
+    })
+  }
+
+  const handleLogin = (event) => {
+    axios.post(
+      'http://localhost:3000/sessions/userLogin',
+      {
+        username: newUser,
+        password: newPassword
+      }
+    ).then(() => {
+      axios
+        .get('http://localhost:3000/sessions/new')
+        .then((response) => {
+          setCurrentUser(response.data)
         })
     })
   }
@@ -164,8 +227,35 @@ const getAddForm = () => {
 
   return (
     <main>
-      <h1>Welcome to...</h1>
+      <h1>Welcome, {currentUser.username}</h1>
       <button onClick={getAddForm}>Add Clothes</button>
+      <button onClick={getSignUp}>Sign Up</button>
+      <button onClick={getLogin}>Login</button>
+      {/* <button onClick={getLogout}>Log Out</button> */}
+
+      {showSignUp ? 
+      <>
+        <h2>Sign Up Form</h2>
+        <form onSubmit={handleNewUser}>
+          <label>Username: </label>
+          <input type='text' onChange={handleNewUsername}></input><br></br>
+          <label>Password: </label>
+          <input type='password' onChange={handleNewPassword}></input><br></br>
+          <input type='submit' value='Sign Up' onClick={getLogin}></input>
+        </form>
+      </> : <></>}
+
+      {showLogin ? 
+      <>
+        <h2>Log In Now!</h2>
+        <form onSubmit={handleLogin}>
+          <label>Username: </label>
+          <input type='text' onChange={handleNewUsername}></input><br></br>
+          <label>Password: </label>
+          <input type='password' onChange={handleNewPassword}></input><br></br>
+          <input type='submit' value='Login'></input>
+        </form>
+      </> : <></>}
 
       {showAddForm ?
        <>
@@ -213,9 +303,9 @@ const getAddForm = () => {
       : null }
       <div className="row row-cols-2 row-cols-md-3 g-4" >
         {
-          clothes.map((clothes) => {
+          clothes.map((clothes, i) => {
             return(
-              <Clothes clothes={clothes} handleUpdate={handleUpdate} handleUpdatedName={handleUpdatedName} handleUpdatedPrice={handleUpdatedPrice} handleUpdatedStore={handleUpdatedStore} handleUpdatedImage={handleUpdatedImage} handleUpdatedLink={handleUpdatedLink} handleUpdatedType={handleUpdatedType} handleDelete={handleDelete}></Clothes>
+              <Clothes key={i} i={i} clothes={clothes} handleUpdate={handleUpdate} handleUpdatedName={handleUpdatedName} handleUpdatedPrice={handleUpdatedPrice} handleUpdatedStore={handleUpdatedStore} handleUpdatedImage={handleUpdatedImage} handleUpdatedLink={handleUpdatedLink} handleUpdatedType={handleUpdatedType} handleDelete={handleDelete}/>
             )
           })
         }
