@@ -8,7 +8,7 @@ import Clothes from './components/clothes'
 const App = () => {
 
   // ========
-  // HOOKS 
+  // HOOKS ls
   // ========
 
   const [clothes, setClothes] = useState([])
@@ -241,7 +241,7 @@ const getLogin = () => {
           <input type='text' onChange={handleNewUsername}></input><br></br>
           <label>Password: </label>
           <input type='password' onChange={handleNewPassword}></input><br></br>
-          <input type='submit' value='Sign Up' onClick={getLogin}></input>
+          <input type='submit' value='Sign Up'></input>
         </form>
       </> : <></>}
 
