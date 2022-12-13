@@ -12,12 +12,6 @@ const Clothes = (props) => {
     const getShowEdit = () => {
       setShowEdit(!showEdit)
     }
-    // const myModal = document.getElementById('myModal')
-    // const myInput = document.getElementById('myInput')
-
-    // myModal.addEventListener('shown.bs.modal', () => {
-    //   myInput.focus()
-    // })
 
     return(
         <div className="col">
@@ -33,11 +27,11 @@ const Clothes = (props) => {
                       <button className='btn btn-danger' onClick={(event) => {
                         props.handleDelete(props.clothes)
                       }}>Delete</button>
-                      <button className='btn btn-danger' data-bs-toggle="modal" data-bs-target={`exampleModal${props.i}`}>Edit</button>
+                      <button className='btn btn-danger' data-bs-toggle="modal" data-bs-target={`#exampleModal${props.clothes._id}`}>Edit</button>
                     </div> : <></>}
                     
                     {/* {showEdit ?  */}
-                      <div className="modal fade" id={`exampleModal${props.i}`}  tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                      <div className="modal fade" id={`exampleModal${props.clothes._id}`}  tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div className="modal-dialog">
                           <div className="modal-content">
                             <div className="modal-header">
@@ -81,7 +75,7 @@ const Clothes = (props) => {
                             </div>
                             <div className="modal-footer">
                               <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                              <button type="button" className="btn btn-primary" onClick={(event) => {props.handleUpdate(props.clothes)}}>Save changes</button>
+                              <button type="button" className="btn btn-primary" data-bs-dismiss="modal" onClick={(event) => {props.handleUpdate(props.clothes)}}>Save changes</button>
                             </div>
                           </div>
                         </div>
