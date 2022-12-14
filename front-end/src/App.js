@@ -16,6 +16,7 @@ const App = () => {
   const [showAddForm, setShowAddForm] = useState(false);
   const [showSignUp, setShowSignUp] = useState(false);
   const [showLogin, setShowLogin] = useState(false);
+  const [showPage, setShowPage] = useState(false);
 
   // const [showEdit, setShowEdit] = useState(false)
 
@@ -74,6 +75,7 @@ const App = () => {
 const getAddForm = () => {
   setShowAddForm(!showAddForm)
   setShowClothes(false)
+  setShowAddAccessories(false)
 }
 
 const getSignUp = () => {
@@ -99,6 +101,7 @@ const getClothes = () => {
 const getAddAccessorieForm = () => {
   setShowAddAccessories(!showAddAccessories)
   setShowClothes(false)
+  setShowAddForm(false)
   
   
 }
@@ -249,6 +252,7 @@ const getAccessories = () => {
         .then((response) => {
           console.log(response.data)
           setUsers(response.data.username)
+          
         })
     })
   }
@@ -262,6 +266,11 @@ const getAccessories = () => {
         .then((response) => {
           console.log(response)
           setUsers('')
+          setShowLogin(false)
+          setShowAccessories(false)
+          setShowClothes(false)
+          setShowAddAccessories(false)
+          setShowAddForm(false)
         })
     })
   }
@@ -418,15 +427,176 @@ const getAccessories = () => {
   return (
     <main>
       <h1>Welcome, {users}</h1>
-      <button onClick={getAddForm}>Add Clothes</button>
-      <button onClick={getAddAccessorieForm}>Add Accessories</button>
-      <button onClick={getAccessories}>Accessories</button>
-      <button onClick={getClothes}>Clothes</button>
-      <button onClick={getSignUp}>Sign Up</button>
-      <button onClick={getLogin}>Login</button>
-      <button onClick={() => {
+      {/* <button onClick={getSignUp}>Sign Up</button>
+      <button onClick={getLogin}>Login</button> */}
+      {/* <button onClick={() => {
+        handleSessionsDelete()
+      }}>Log Out</button> */}
+
+      {/* <div id="carouselExampleSlidesOnly" className="carousel slide" data-bs-ride="carousel">
+        <div className="carousel-inner">
+          <div className="carousel-item active">
+            <img src="https://img.freepik.com/vetores-gratis/fundo-do-conceito-boutique-loja-fachada-com-tabuleta_1441-2619.jpg?w=2000" className="d-block w-100" alt="..."/>
+          </div>
+          <div className="carousel-item">
+            <img src="https://img03.shop-pro.jp/PA01003/897/etc/1.jpg?cmsp_timestamp=20190312200659" className="d-block w-100" alt="..."/>
+          </div>
+          <div className="carousel-item">
+            <img src="https://image.uniqlo.com/UQ/ST3/WesternCommon/imagesgoods/450567/item/goods_02_450567.jpg?width=850" className="d-block w-100" alt="..."/>
+          </div>
+        </div>
+      </div> */}
+
+      {users ? <>
+        <button onClick={() => {
         handleSessionsDelete()
       }}>Log Out</button>
+        <div>
+          <button onClick={getAddForm}>Add Clothes</button>
+          <button onClick={getAddAccessorieForm}>Add Accessories</button>
+          <button onClick={getAccessories}>Accessories</button>
+          <button onClick={getClothes}>Clothes</button>
+        </div>
+        {showAddForm ?
+       <>
+        <h2>Add New Item</h2>
+        <div className='container'>
+          <form className="row" onSubmit={handleNewClothes}>
+            
+            <div className="col-md-6">
+              <label className="form-label">Name</label> 
+              <input type="text" className="form-control" onChange={handleNewName} /><br/>
+            </div>
+
+            <div className="col-md-6">
+              <label className="form-label">Name of Store</label>  
+              <input type="text" className="form-control" onChange={handleNewStore} /><br/>
+            </div>
+
+            <div className="col-md-6">
+              <label className="form-label">Price</label>
+              <input type="number" className="form-control" onChange={handleNewPrice}/><br/>
+            </div>
+
+            <div className="col-md-6">
+              <label className="form-label">Type/Category</label>  
+              <input type="text" className="form-control" onChange={handleNewType} /><br/>
+            </div>
+
+            <div className="col-md-12">
+              <label className="form-label">Image Link</label>  
+              <input type="text" className="form-control" onChange={handleNewImage} /><br/>
+            </div>
+
+            <div className="col-md-12">
+              <label className="form-label">Link to Store Site</label>  
+              <input type="text" className="form-control" onChange={handleNewLink} /><br/>
+            </div>
+            
+            <div className="col-md-12"> 
+              <input type="submit" className="form-control btn-info" value="Add New Item" />
+            </div>
+
+          </form>
+        </div>
+       </>  
+      : null }
+
+
+        {showAddAccessories ?  
+        <>
+          <h2>Add New Accessories</h2>
+          <div className='container'>
+            <form className="row" onSubmit={handleNewAccessorie}>
+              
+              <div className="col-md-6">
+                <label className="form-label">Name</label> 
+                <input type="text" className="form-control" onChange={handleNewAccessorieName} /><br/>
+              </div>
+
+              <div className="col-md-6">
+                <label className="form-label">Name of Store</label>  
+                <input type="text" className="form-control" onChange={handleNewAccessorieStore} /><br/>
+              </div>
+
+              <div className="col-md-6">
+                <label className="form-label">Price</label>
+                <input type="number" className="form-control" onChange={handleNewAccessoriePrice}/><br/>
+              </div>
+
+              <div className="col-md-6">
+                <label className="form-label">Type/Category</label>  
+                <input type="text" className="form-control" onChange={handleNewAccessorieType} /><br/>
+              </div>
+
+              <div className="col-md-12">
+                <label className="form-label">Image Link</label>  
+                <input type="text" className="form-control" onChange={handleNewAccessorieImage} /><br/>
+              </div>
+
+              <div className="col-md-12">
+                <label className="form-label">Link to Store Site</label>  
+                <input type="text" className="form-control" onChange={handleNewAccessorieLink} /><br/>
+              </div>
+              
+              <div className="col-md-12"> 
+                <input type="submit" className="form-control btn-dark" value="Add New Accessories" />
+              </div>
+
+            </form>
+          </div>
+        </>
+        : null }
+
+      {showClothes ? 
+        <div className="row row-cols-2 row-cols-md-3 g-4" >
+          {
+            clothes.map((clothes, i) => {
+              return(
+                <Clothes key={i} i={i} clothes={clothes} handleUpdate={handleUpdate} handleUpdatedName={handleUpdatedName} handleUpdatedPrice={handleUpdatedPrice} handleUpdatedStore={handleUpdatedStore} handleUpdatedImage={handleUpdatedImage} handleUpdatedLink={handleUpdatedLink} handleUpdatedType={handleUpdatedType} handleDelete={handleDelete}/>
+              )
+            })
+          }
+        </div> : null}
+
+      { showAccessories ? 
+        <div className="row row-cols-2 row-cols-md-3 g-4" >
+          {
+            accessories.map((accessories, i) => {
+              return(
+                <Accessories key={i} i={i} accessories={accessories} handleUpdateAccessorie={handleUpdateAccessorie} handleUpdatedAccessorieName={handleUpdatedAccessorieName} handleUpdatedAccessoriePrice={handleUpdatedAccessoriePrice} handleUpdatedAccessorieStore={handleUpdatedAccessorieStore} handleUpdatedAccessorieImage={handleUpdatedAccessorieImage} handleUpdatedAccessorieLink={handleUpdatedAccessorieLink} handleUpdatedAccessorieType={handleUpdatedAccessorieType} handleDeleteAccessorie={handleDeleteAccessorie}/>
+              )
+            })
+          }
+        </div>: null }
+      </> : <>
+      <button onClick={getSignUp}>Sign Up</button>
+      <button onClick={getLogin}>Login</button>
+      <div id="carouselExampleSlidesOnly" className="carousel slide" data-bs-ride="carousel">
+        <div className="carousel-inner">
+          <div className="carousel-item active">
+            <img src="https://img.freepik.com/vetores-gratis/fundo-do-conceito-boutique-loja-fachada-com-tabuleta_1441-2619.jpg?w=2000" className="d-block w-100" alt="..."/>
+          </div>
+          <div className="carousel-item">
+            <img src="https://img03.shop-pro.jp/PA01003/897/etc/1.jpg?cmsp_timestamp=20190312200659" className="d-block w-100" alt="..."/>
+          </div>
+          <div className="carousel-item">
+            <img src="https://image.uniqlo.com/UQ/ST3/WesternCommon/imagesgoods/450567/item/goods_02_450567.jpg?width=850" className="d-block w-100" alt="..."/>
+          </div>
+        </div>
+      </div>
+      {showLogin ? 
+      <>
+        <h2>Log In Now!</h2>
+        <form onSubmit={handleLogin}>
+          <label>Username: </label>
+          <input type='text' onChange={handleNewUsername}></input><br></br>
+          <label>Password: </label>
+          <input type='password' onChange={handleNewPassword}></input><br></br>
+          <input type='submit' value='Login'></input>
+        </form>
+      </> : <></>}</>}
+      
 
       {showSignUp ? 
       <>
@@ -440,7 +610,7 @@ const getAccessories = () => {
         </form>
       </> : <></>}
 
-      {showLogin ? 
+      {/* {showLogin ? 
       <>
         <h2>Log In Now!</h2>
         <form onSubmit={handleLogin}>
@@ -450,9 +620,9 @@ const getAccessories = () => {
           <input type='password' onChange={handleNewPassword}></input><br></br>
           <input type='submit' value='Login'></input>
         </form>
-      </> : <></>}
+      </> : <></>} */}
 
-      {showAddForm ?
+      {/* {showAddForm ?
        <>
         <h2>Add New Item</h2>
         <div className='container'>
@@ -564,8 +734,8 @@ const getAccessories = () => {
               )
             })
           }
-        </div>: null }
-
+        </div>: null } */}
+        
 
     </main>
   )

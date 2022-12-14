@@ -17,7 +17,7 @@ const Clothes = (props) => {
         <div className="col">
                 <div className="card" style={{width: "18 rem"}}>
                   <h2>{props.clothes.store}</h2>
-                  <img src={props.clothes.image} className="card-img-top" onClick={showDescription}></img>
+                  <img src={props.clothes.image} className="card-img-top img-thumbnail" onClick={showDescription}/>
                   <div className='card-body'>
                     <h5 className="card-title" onClick={showDescription}>{props.clothes.name}</h5>
                     {showInfo ? <div>
