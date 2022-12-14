@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import './App.css';
 import {useState, useEffect} from 'react'
 import axios from 'axios'
@@ -65,7 +64,6 @@ const App = () => {
   // HOOKS FOR LOGIN
   // ==================
   const [users, setUsers] = useState([])
-  const [currentUser, setCurrentUser] = useState([])
   const [newUser, setNewUser] = useState('')
   const [newPassword, setNewPassword] = useState('')
 
@@ -101,6 +99,7 @@ const getAddAccessorieForm = () => {
 // ==========
 // NEW FORM
 // ==========
+//clothes
   const handleNewName = (event) => {
     setNewName(event.target.value)
   }
