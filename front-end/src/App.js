@@ -28,7 +28,6 @@ const App = () => {
   const [newType, setNewType] = useState('')
 
   const [users, setUsers] = useState([])
-  const [currentUser, setCurrentUser] = useState([])
   const [newUser, setNewUser] = useState('')
   const [newPassword, setNewPassword] = useState('')
 
