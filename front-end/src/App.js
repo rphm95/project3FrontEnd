@@ -40,9 +40,9 @@ const App = () => {
   const [updatedLink, setUpdatedLink] = useState()
   const [updatedType, setUpdatedType] = useState()
 
-// ==========
+// ==============
 // get functions
-// ==========
+// ==============
 const getAddForm = () => {
   setShowAddForm(!showAddForm)
 }
@@ -59,9 +59,6 @@ const getLogin = () => {
   setShowSignUp(false)
 }
 
-// const getShowEdit = () => {
-//   setShowEdit(!showEdit)
-// }
 
 // ==========
 // NEW FORM
