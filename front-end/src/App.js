@@ -43,6 +43,7 @@ const App = () => {
   // show
   const [showAddAccessories, setShowAddAccessories] = useState(false)
   const [showAccessories, setShowAccessories] = useState(false)
+  const [showClothes, setShowClothes] = useState(false)
 
   //new accessorie
   const [newAccessorieName, setNewAccessorieName] = useState('')
@@ -72,27 +73,38 @@ const App = () => {
 // ==============
 const getAddForm = () => {
   setShowAddForm(!showAddForm)
+  setShowClothes(false)
 }
 
 const getSignUp = () => {
   setShowSignUp(!showSignUp)
   setShowAddForm(false)
   setShowLogin(false)
+  setShowClothes(false)
 }
 
 const getLogin = () => {
   setShowLogin(!showLogin)
   setShowAddForm(false)
   setShowSignUp(false)
+  setShowClothes(false)
 }
 
-const getAccessories = () => {
-  setShowAccessories(!showAccessories)
+const getClothes = () => {
+  setShowClothes(!showClothes)
+  setShowAccessories(false)
 }
 
 // for accessories
 const getAddAccessorieForm = () => {
   setShowAddAccessories(!showAddAccessories)
+  setShowClothes(false)
+  
+  
+}
+const getAccessories = () => {
+  setShowAccessories(!showAccessories)
+  setShowClothes(false)
 }
 
 
@@ -408,6 +420,8 @@ const getAddAccessorieForm = () => {
       <h1>Welcome, {users}</h1>
       <button onClick={getAddForm}>Add Clothes</button>
       <button onClick={getAddAccessorieForm}>Add Accessories</button>
+      <button onClick={getAccessories}>Accessories</button>
+      <button onClick={getClothes}>Clothes</button>
       <button onClick={getSignUp}>Sign Up</button>
       <button onClick={getLogin}>Login</button>
       <button onClick={() => {
@@ -521,7 +535,7 @@ const getAddAccessorieForm = () => {
               </div>
               
               <div className="col-md-12"> 
-                <input type="submit" className="form-control btn-info" value="Add New Item" />
+                <input type="submit" className="form-control btn-dark" value="Add New Accessories" />
               </div>
 
             </form>
@@ -529,16 +543,16 @@ const getAddAccessorieForm = () => {
         </>
         : null }
 
-
-      <div className="row row-cols-2 row-cols-md-3 g-4" >
-        {
-          clothes.map((clothes, i) => {
-            return(
-              <Clothes key={i} i={i} clothes={clothes} handleUpdate={handleUpdate} handleUpdatedName={handleUpdatedName} handleUpdatedPrice={handleUpdatedPrice} handleUpdatedStore={handleUpdatedStore} handleUpdatedImage={handleUpdatedImage} handleUpdatedLink={handleUpdatedLink} handleUpdatedType={handleUpdatedType} handleDelete={handleDelete}/>
-            )
-          })
-        }
-      </div>
+      {showClothes ? 
+        <div className="row row-cols-2 row-cols-md-3 g-4" >
+          {
+            clothes.map((clothes, i) => {
+              return(
+                <Clothes key={i} i={i} clothes={clothes} handleUpdate={handleUpdate} handleUpdatedName={handleUpdatedName} handleUpdatedPrice={handleUpdatedPrice} handleUpdatedStore={handleUpdatedStore} handleUpdatedImage={handleUpdatedImage} handleUpdatedLink={handleUpdatedLink} handleUpdatedType={handleUpdatedType} handleDelete={handleDelete}/>
+              )
+            })
+          }
+        </div> : null}
 
       { showAccessories ? 
         <div className="row row-cols-2 row-cols-md-3 g-4" >
