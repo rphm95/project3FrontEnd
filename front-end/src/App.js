@@ -7,12 +7,11 @@ import Accessories from './components/accessories'
 
 const App = () => {
 
-  // ========
-  // HOOKS ls
-  // ========
+  // ==================
+  // HOOKS FOR CLOTHES
+  // ==================
 
   const [clothes, setClothes] = useState([])
-  const [accessories, setAccessories] = useState([])
   // show
   const [showAddForm, setShowAddForm] = useState(false);
   const [showSignUp, setShowSignUp] = useState(false);
@@ -20,26 +19,13 @@ const App = () => {
 
   // const [showEdit, setShowEdit] = useState(false)
 
-  // new Cloth
+  // new Clothes
   const [newName, setNewName] = useState('')
   const [newPrice, setNewPrice] = useState()
   const [newStore, setNewStore] = useState('')
   const [newImage, setNewImage] = useState('')
   const [newLink, setNewLink] = useState('')
   const [newType, setNewType] = useState('')
-
-   // User
-  const [users, setUsers] = useState([])
-  const [newUser, setNewUser] = useState('')
-  const [newPassword, setNewPassword] = useState('')
-
-  // new Accessories
-  const [newAccName, setNewAccName] = useState('')
-  const [newAccPrice, setNewAccPrice] = useState()
-  const [newAccStore, setNewAccStore] = useState('')
-  const [newAccImage, setNewAccImage] = useState('')
-  const [newAccLink, setNewAccLink] = useState('')
-  const [newAccType, setNewAccType] = useState('')
 
   // update
   const [updatedName, setUpdatedName] = useState()
@@ -49,16 +35,41 @@ const App = () => {
   const [updatedLink, setUpdatedLink] = useState()
   const [updatedType, setUpdatedType] = useState()
 
-  const [updatedAccName, setUpdatedAccName] = useState()
-  const [updatedAccPrice, setUpdatedAccPrice] = useState()
-  const [updatedAccStore, setUpdatedAccStore] = useState()
-  const [updatedAccImage, setUpdatedAccImage] = useState()
-  const [updatedAccLink, setUpdatedAccLink] = useState()
-  const [updatedAccType, setUpdatedAccType] = useState()
+  // =====================
+  // HOOKS FOR ACCESSORIES
+  // =====================
+  const [accessories, setAccessories] = useState([])
 
-// ==========
+  // show
+  const [showAddAccessories, setShowAddAccessories] = useState(false)
+  const [showAccessories, setShowAccessories] = useState(false)
+
+  //new accessorie
+  const [newAccessorieName, setNewAccessorieName] = useState('')
+  const [newAccessoriePrice, setNewAccessoriePrice] = useState()
+  const [newAccessorieStore, setNewAccessorieStore] = useState('')
+  const [newAccessorieImage, setNewAccessorieImage] = useState('')
+  const [newAccessorieLink, setNewAccessorieLink] = useState('')
+  const [newAccessorieType, setNewAccessorieType] = useState('')
+
+  // update
+  const [updatedAccessorieName, setUpdatedAccessorieName] = useState()
+  const [updatedAccessoriePrice, setUpdatedAccessoriePrice] = useState()
+  const [updatedAccessorieStore, setUpdatedAccessorieStore] = useState()
+  const [updatedAccessorieImage, setUpdatedAccessorieImage] = useState()
+  const [updatedAccessorieLink, setUpdatedAccessorieLink] = useState()
+  const [updatedAccessorieType, setUpdatedAccessorieType] = useState()
+
+  // ==================
+  // HOOKS FOR LOGIN
+  // ==================
+  const [users, setUsers] = useState([])
+  const [newUser, setNewUser] = useState('')
+  const [newPassword, setNewPassword] = useState('')
+
+// ==============
 // get functions
-// ==========
+// ==============
 const getAddForm = () => {
   setShowAddForm(!showAddForm)
 }
@@ -74,6 +85,16 @@ const getLogin = () => {
   setShowAddForm(false)
   setShowSignUp(false)
 }
+
+const getAccessories = () => {
+  setShowAccessories(!showAccessories)
+}
+
+// for accessories
+const getAddAccessorieForm = () => {
+  setShowAddAccessories(!showAddAccessories)
+}
+
 
 // ==========
 // NEW FORM
@@ -103,32 +124,6 @@ const getLogin = () => {
     setNewType(event.target.value)
   }
 
-  //accessories
-
-  // const handleNewAccName = (event) => {
-  //   setNewAccName(event.target.value)
-  // }
-
-  // const handleNewAccPrice = (event) => {
-  //   setNewAccPrice(event.target.value)
-  // }
-
-  // const handleNewAccStore = (event) => {
-  //   setNewAccStore(event.target.value)
-  // }
-
-  // const handleNewAccImage = (event) => {
-  //   setNewAccImage(event.target.value)
-  // }
-
-  // const handleNewAccLink = (event) => {
-  //   setNewAccLink(event.target.value)
-  // }
-
-  // const handleNewAccType = (event) => {
-  //   setNewAccType(event.target.value)
-  // }
-
   const handleNewUsername = (event) => {
     setNewUser(event.target.value)
   }
@@ -141,7 +136,7 @@ const getLogin = () => {
   const handleNewClothes = (event) => {
     event.preventDefault()
     axios.post(
-      'https://gentle-island-40061.herokuapp.com/boutique',
+      'http://localhost:3000/boutique',
       {
         name: newName,
         price: newPrice,
@@ -152,24 +147,52 @@ const getLogin = () => {
       }
     ).then(() => {
       axios
-        .get('https://gentle-island-40061.herokuapp.com/boutique')
+        .get('http://localhost:3000/boutique')
         .then((response) => {
           setClothes(response.data)
         })
     })
   }
 
-  const handleNewAccessories = (event) => {
+  // ================================
+  //        NEW FORM ACCESSORIES
+  // =================================
+  const handleNewAccessorieName = (event) => {
+    setNewAccessorieName(event.target.value)
+  }
+
+  const handleNewAccessoriePrice = (event) => {
+    setNewAccessoriePrice(event.target.value)
+  }
+
+  const handleNewAccessorieStore = (event) => {
+    setNewAccessorieStore(event.target.value)
+  }
+
+  const handleNewAccessorieImage = (event) => {
+    setNewAccessorieImage(event.target.value)
+  }
+
+  const handleNewAccessorieLink = (event) => {
+    setNewAccessorieLink(event.target.value)
+  }
+
+  const handleNewAccessorieType = (event) => {
+    setNewAccessorieType(event.target.value)
+  }
+
+  // handle new ACCESSORIES form
+  const handleNewAccessorie = (event) => {
     event.preventDefault()
     axios.post(
       'http://localhost:3000/accessories',
       {
-        name: newAccName,
-        price: newAccPrice,
-        store: newAccStore,
-        image: newAccImage,
-        link: newAccLink,
-        type: newAccType
+        name: newAccessorieName,
+        price: newAccessoriePrice,
+        store: newAccessorieStore,
+        image: newAccessorieImage,
+        link: newAccessorieLink,
+        type: newAccessorieType
       }
     ).then(() => {
       axios
@@ -180,16 +203,19 @@ const getLogin = () => {
     })
   }
 
+  // ===============
+  //  USER HANDLER
+  // ===============
   const handleNewUser = (event) => {
     axios.post(
-      'https://gentle-island-40061.herokuapp.com/users/new',
+      'http://localhost:3000/users/new',
       {
         username: newUser,
         password: newPassword
       }, {withCredentials:true}
     ).then(() => {
       axios
-        .get('https://gentle-island-40061.herokuapp.com/users/new')
+        .get('http://localhost:3000/users/new')
         .then((response) => {
           console.log(response.data)
         })
@@ -200,14 +226,14 @@ const getLogin = () => {
   const handleLogin = (event) => {
     event.preventDefault()
     axios.post(
-      'https://gentle-island-40061.herokuapp.com/sessions/userLogin',
+      'http://localhost:3000/sessions/userLogin',
       {
         username: newUser,
         password: newPassword
       }, {withCredentials:true}
     ).then(() => {
       axios
-        .get('https://gentle-island-40061.herokuapp.com/sessions/new', {withCredentials:true})
+        .get('http://localhost:3000/sessions/new', {withCredentials:true})
         .then((response) => {
           console.log(response.data)
           setUsers(response.data.username)
@@ -217,20 +243,19 @@ const getLogin = () => {
 
   const handleSessionsDelete = (event) => {
     axios.delete(
-      'https://gentle-island-40061.herokuapp.com/sessions/', {withCredentials:true}
+      'http://localhost:3000/sessions/', {withCredentials:true}
     ).then(() => {
       axios
-        .get('https://gentle-island-40061.herokuapp.com/sessions/new')
+        .get('http://localhost:3000/sessions/new')
         .then((response) => {
           console.log(response)
           setUsers('')
         })
     })
   }
-
-  // ========
-  // UPDATE
-  // ========
+  // ===============================
+  //        UPDATE CLOTHES
+  // ================================
   const handleUpdatedName = (event) => {
     setUpdatedName(event.target.value)
   }
@@ -258,7 +283,7 @@ const getLogin = () => {
   const handleUpdate = (clothesData) => {
     axios
       .put(
-        `https://gentle-island-40061.herokuapp.com/boutique/${clothesData._id}`,
+        `http://localhost:3000/boutique/${clothesData._id}`,
         {
           name: updatedName,
           price: updatedPrice,
@@ -269,78 +294,82 @@ const getLogin = () => {
         }
       ).then((response) => {
         axios
-          .get('https://gentle-island-40061.herokuapp.com/boutique')
+          .get('http://localhost:3000/boutique')
           .then((response) => {
             setClothes(response.data)
           })
       })
   }
-
-  //accessories
-
-  const handleUpdatedAccName = (event) => {
-    setUpdatedAccName(event.target.value)
+  // ===================================
+  //          UPDATE ACCESSORIES
+  // ===================================
+  const handleUpdatedAccessorieName = (event) => {
+    setUpdatedAccessorieName(event.target.value)
   }
 
-  const handleUpdatedAccPrice = (event) => {
-    setUpdatedAccPrice(event.target.value)
+  const handleUpdatedAccessoriePrice = (event) => {
+    setUpdatedAccessoriePrice(event.target.value)
   }
 
-  const handleUpdatedAccStore = (event) => {
-    setUpdatedAccStore(event.target.value)
+  const handleUpdatedAccessorieStore = (event) => {
+    setUpdatedAccessorieStore(event.target.value)
   }
 
-  const handleUpdatedAccImage = (event) => {
-    setUpdatedAccImage(event.target.value)
+  const handleUpdatedAccessorieImage = (event) => {
+    setUpdatedAccessorieImage(event.target.value)
   }
 
-  const handleUpdatedAccLink = (event) => {
-    setUpdatedAccLink(event.target.value)
+  const handleUpdatedAccessorieLink = (event) => {
+    setUpdatedAccessorieLink(event.target.value)
   }
 
-  const handleUpdatedAccType = (event) => {
-    setUpdatedAccType(event.target.value)
+  const handleUpdatedAccessorieType = (event) => {
+    setUpdatedAccessorieType(event.target.value)
   }
 
-  const handleAccUpdate = (accData) => {
+  const handleUpdateAccessorie = (accessoriesData) => {
     axios
       .put(
-        `http://localhost:3000/${accData._id}`,
+        `http://localhost:3000/accessories/${accessoriesData._id}`,
         {
-          name: updatedAccName,
-          price: updatedAccPrice,
-          store: updatedAccStore,
-          image: updatedAccImage,
-          link: updatedAccLink,
-          type: updatedAccType
+          name: updatedAccessorieName,
+          price: updatedAccessoriePrice,
+          store: updatedAccessorieStore,
+          image: updatedAccessorieImage,
+          link: updatedAccessorieLink,
+          type: updatedAccessorieType
         }
       ).then((response) => {
         axios
           .get('http://localhost:3000/accessories')
           .then((response) => {
+            // console.log(response.data)
             setAccessories(response.data)
           })
       })
   }
 
-  // ========
-  // DELETE
-  // ========
+  // ===============================
+  //        DELETE CLOTHES
+  // ===============================
   const handleDelete = (clothesData) => {
     axios
-        .delete(`https://gentle-island-40061.herokuapp.com/boutique/${clothesData._id}`)
+        .delete(`http://localhost:3000/boutique/${clothesData._id}`)
         .then(() => {
           axios
-              .get('https://gentle-island-40061.herokuapp.com/boutique')
+              .get('http://localhost:3000/boutique')
               .then((response) => {
                 setClothes(response.data)
               })
         })
   }
 
-  const handleAccDelete = (accData) => {
+  // ==============================
+  //        DELETE ACCESSORIES
+  // ===============================
+  const handleDeleteAccessorie = (accessoriesData) => {
     axios
-        .delete(`http://localhost:3000/${accData._id}`)
+        .delete(`http://localhost:3000/accessories/${accessoriesData._id}`)
         .then(() => {
           axios
               .get('http://localhost:3000/accessories')
@@ -354,35 +383,31 @@ const getLogin = () => {
 
   useEffect(() => {
     axios
-      .get('https://gentle-island-40061.herokuapp.com/boutique')
+      .get('http://localhost:3000/accessories')
+      .then((response) => {
+        // console.log(response.data)
+        setAccessories(response.data)
+      })
+    axios
+      .get('http://localhost:3000/boutique')
       .then((response) => {
         setClothes(response.data)
       })
       axios
-      .get('http://localhost:3000/accessories')
-      .then((response) => {
-        setAccessories(response.data)
-      })
-      axios
-      .get('https://gentle-island-40061.herokuapp.com/sessions/new', {withCredentials:true})
+      .get('http://localhost:3000/sessions/new', {withCredentials:true})
       .then((response) => {
         setUsers(response.data.username)
-        console.log(response.data)
+        // console.log(response.data)
       })
   }, [])
+
+
 
   return (
     <main>
       <h1>Welcome, {users}</h1>
-      {/* {
-        accessories.map((accessories) => {
-          return(
-            <Accessories accessories={accessories}></Accessories>
-          )
-        })
-      } */}
-
       <button onClick={getAddForm}>Add Clothes</button>
+      <button onClick={getAddAccessorieForm}>Add Accessories</button>
       <button onClick={getSignUp}>Sign Up</button>
       <button onClick={getLogin}>Login</button>
       <button onClick={() => {
@@ -457,6 +482,54 @@ const getLogin = () => {
         </div>
        </>  
       : null }
+
+
+        {showAddAccessories ?  
+        <>
+          <h2>Add New Accessories</h2>
+          <div className='container'>
+            <form className="row" onSubmit={handleNewAccessorie}>
+              
+              <div className="col-md-6">
+                <label className="form-label">Name</label> 
+                <input type="text" className="form-control" onChange={handleNewAccessorieName} /><br/>
+              </div>
+
+              <div className="col-md-6">
+                <label className="form-label">Name of Store</label>  
+                <input type="text" className="form-control" onChange={handleNewAccessorieStore} /><br/>
+              </div>
+
+              <div className="col-md-6">
+                <label className="form-label">Price</label>
+                <input type="number" className="form-control" onChange={handleNewAccessoriePrice}/><br/>
+              </div>
+
+              <div className="col-md-6">
+                <label className="form-label">Type/Category</label>  
+                <input type="text" className="form-control" onChange={handleNewAccessorieType} /><br/>
+              </div>
+
+              <div className="col-md-12">
+                <label className="form-label">Image Link</label>  
+                <input type="text" className="form-control" onChange={handleNewAccessorieImage} /><br/>
+              </div>
+
+              <div className="col-md-12">
+                <label className="form-label">Link to Store Site</label>  
+                <input type="text" className="form-control" onChange={handleNewAccessorieLink} /><br/>
+              </div>
+              
+              <div className="col-md-12"> 
+                <input type="submit" className="form-control btn-info" value="Add New Item" />
+              </div>
+
+            </form>
+          </div>
+        </>
+        : null }
+
+
       <div className="row row-cols-2 row-cols-md-3 g-4" >
         {
           clothes.map((clothes, i) => {
@@ -466,6 +539,18 @@ const getLogin = () => {
           })
         }
       </div>
+
+      { showAccessories ? 
+        <div className="row row-cols-2 row-cols-md-3 g-4" >
+          {console.log(accessories)}
+          {
+            accessories.map((accessories, i) => {
+              return(
+                <Accessories key={i} i={i} accessories={accessories} handleUpdateAccessorie={handleUpdateAccessorie} handleUpdatedAccessorieName={handleUpdatedAccessorieName} handleUpdatedAccessoriePrice={handleUpdatedAccessoriePrice} handleUpdatedAccessorieStore={handleUpdatedAccessorieStore} handleUpdatedAccessorieImage={handleUpdatedAccessorieImage} handleUpdatedAccessorieLink={handleUpdatedAccessorieLink} handleUpdatedAccessorieType={handleUpdatedAccessorieType} handleDeleteAccessorie={handleDeleteAccessorie}/>
+              )
+            })
+          }
+        </div>: null }
 
 
     </main>

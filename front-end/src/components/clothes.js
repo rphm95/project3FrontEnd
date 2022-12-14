@@ -27,7 +27,7 @@ const Clothes = (props) => {
                       <button className='btn btn-danger' onClick={(event) => {
                         props.handleDelete(props.clothes)
                       }}>Delete</button>
-                      <button className='btn btn-danger' data-bs-toggle="modal" data-bs-target={`#exampleModal${props.clothes._id}`}>Edit</button>
+                      <button className='btn btn-info' data-bs-toggle="modal" data-bs-target={`#exampleModal${props.clothes._id}`}>Edit</button>
                     </div> : <></>}
                     
                     {/* {showEdit ?  */}
