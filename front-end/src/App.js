@@ -1,8 +1,8 @@
-import logo from './logo.svg';
 import './App.css';
 import {useState, useEffect} from 'react'
 import axios from 'axios'
 import Clothes from './components/clothes'
+import Accessories from './components/accessories'
 
 
 const App = () => {
@@ -12,6 +12,7 @@ const App = () => {
   // ========
 
   const [clothes, setClothes] = useState([])
+  const [accessories, setAccessories] = useState([])
   // show
   const [showAddForm, setShowAddForm] = useState(false);
   const [showSignUp, setShowSignUp] = useState(false);
@@ -27,9 +28,18 @@ const App = () => {
   const [newLink, setNewLink] = useState('')
   const [newType, setNewType] = useState('')
 
+   // User
   const [users, setUsers] = useState([])
   const [newUser, setNewUser] = useState('')
   const [newPassword, setNewPassword] = useState('')
+
+  // new Accessories
+  const [newAccName, setNewAccName] = useState('')
+  const [newAccPrice, setNewAccPrice] = useState()
+  const [newAccStore, setNewAccStore] = useState('')
+  const [newAccImage, setNewAccImage] = useState('')
+  const [newAccLink, setNewAccLink] = useState('')
+  const [newAccType, setNewAccType] = useState('')
 
   // update
   const [updatedName, setUpdatedName] = useState()
@@ -38,6 +48,13 @@ const App = () => {
   const [updatedImage, setUpdatedImage] = useState()
   const [updatedLink, setUpdatedLink] = useState()
   const [updatedType, setUpdatedType] = useState()
+
+  const [updatedAccName, setUpdatedAccName] = useState()
+  const [updatedAccPrice, setUpdatedAccPrice] = useState()
+  const [updatedAccStore, setUpdatedAccStore] = useState()
+  const [updatedAccImage, setUpdatedAccImage] = useState()
+  const [updatedAccLink, setUpdatedAccLink] = useState()
+  const [updatedAccType, setUpdatedAccType] = useState()
 
 // ==========
 // get functions
@@ -58,13 +75,10 @@ const getLogin = () => {
   setShowSignUp(false)
 }
 
-// const getShowEdit = () => {
-//   setShowEdit(!showEdit)
-// }
-
 // ==========
 // NEW FORM
 // ==========
+//clothes
   const handleNewName = (event) => {
     setNewName(event.target.value)
   }
@@ -88,6 +102,32 @@ const getLogin = () => {
   const handleNewType = (event) => {
     setNewType(event.target.value)
   }
+
+  //accessories
+
+  // const handleNewAccName = (event) => {
+  //   setNewAccName(event.target.value)
+  // }
+
+  // const handleNewAccPrice = (event) => {
+  //   setNewAccPrice(event.target.value)
+  // }
+
+  // const handleNewAccStore = (event) => {
+  //   setNewAccStore(event.target.value)
+  // }
+
+  // const handleNewAccImage = (event) => {
+  //   setNewAccImage(event.target.value)
+  // }
+
+  // const handleNewAccLink = (event) => {
+  //   setNewAccLink(event.target.value)
+  // }
+
+  // const handleNewAccType = (event) => {
+  //   setNewAccType(event.target.value)
+  // }
 
   const handleNewUsername = (event) => {
     setNewUser(event.target.value)
@@ -115,6 +155,27 @@ const getLogin = () => {
         .get('https://gentle-island-40061.herokuapp.com/boutique')
         .then((response) => {
           setClothes(response.data)
+        })
+    })
+  }
+
+  const handleNewAccessories = (event) => {
+    event.preventDefault()
+    axios.post(
+      'http://localhost:3000/accessories',
+      {
+        name: newAccName,
+        price: newAccPrice,
+        store: newAccStore,
+        image: newAccImage,
+        link: newAccLink,
+        type: newAccType
+      }
+    ).then(() => {
+      axios
+        .get('http://localhost:3000/accessories')
+        .then((response) => {
+          setAccessories(response.data)
         })
     })
   }
@@ -215,6 +276,53 @@ const getLogin = () => {
       })
   }
 
+  //accessories
+
+  const handleUpdatedAccName = (event) => {
+    setUpdatedAccName(event.target.value)
+  }
+
+  const handleUpdatedAccPrice = (event) => {
+    setUpdatedAccPrice(event.target.value)
+  }
+
+  const handleUpdatedAccStore = (event) => {
+    setUpdatedAccStore(event.target.value)
+  }
+
+  const handleUpdatedAccImage = (event) => {
+    setUpdatedAccImage(event.target.value)
+  }
+
+  const handleUpdatedAccLink = (event) => {
+    setUpdatedAccLink(event.target.value)
+  }
+
+  const handleUpdatedAccType = (event) => {
+    setUpdatedAccType(event.target.value)
+  }
+
+  const handleAccUpdate = (accData) => {
+    axios
+      .put(
+        `http://localhost:3000/${accData._id}`,
+        {
+          name: updatedAccName,
+          price: updatedAccPrice,
+          store: updatedAccStore,
+          image: updatedAccImage,
+          link: updatedAccLink,
+          type: updatedAccType
+        }
+      ).then((response) => {
+        axios
+          .get('http://localhost:3000/accessories')
+          .then((response) => {
+            setAccessories(response.data)
+          })
+      })
+  }
+
   // ========
   // DELETE
   // ========
@@ -230,6 +338,18 @@ const getLogin = () => {
         })
   }
 
+  const handleAccDelete = (accData) => {
+    axios
+        .delete(`http://localhost:3000/${accData._id}`)
+        .then(() => {
+          axios
+              .get('http://localhost:3000/accessories')
+              .then((response) => {
+                setAccessories(response.data)
+              })
+        })
+  }
+
 
 
   useEffect(() => {
@@ -237,6 +357,11 @@ const getLogin = () => {
       .get('https://gentle-island-40061.herokuapp.com/boutique')
       .then((response) => {
         setClothes(response.data)
+      })
+      axios
+      .get('http://localhost:3000/accessories')
+      .then((response) => {
+        setAccessories(response.data)
       })
       axios
       .get('https://gentle-island-40061.herokuapp.com/sessions/new', {withCredentials:true})
@@ -249,6 +374,14 @@ const getLogin = () => {
   return (
     <main>
       <h1>Welcome, {users}</h1>
+      {/* {
+        accessories.map((accessories) => {
+          return(
+            <Accessories accessories={accessories}></Accessories>
+          )
+        })
+      } */}
+
       <button onClick={getAddForm}>Add Clothes</button>
       <button onClick={getSignUp}>Sign Up</button>
       <button onClick={getLogin}>Login</button>
