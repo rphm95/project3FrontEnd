@@ -10,10 +10,10 @@ const Accessories = (props) => {
     }
 
     return (
-        <div className="col">
-            <div className="card" style={{width: "18 rem"}}>
+        // <div className="col">
+            <div className="card" style={{width: "18 rem"}} id="margin">
                 <h2>{props.accessories.store}</h2>
-                <img src={props.accessories.image} className="card-img-top" onClick={showDescriptionAccessories}></img>
+                <img src={props.accessories.image} className="card-img-top" onClick={showDescriptionAccessories}/>
                 <div className='card-body'>
                     <h5 className="card-title" onClick={showDescriptionAccessories}>{props.accessories.name}</h5>
 
@@ -84,7 +84,7 @@ const Accessories = (props) => {
 
                 </div>
             </div>
-        </div>
+       // </div>
     )  
 
 }
