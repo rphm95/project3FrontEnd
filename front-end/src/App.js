@@ -3,13 +3,14 @@ import './App.css';
 import {useState, useEffect} from 'react'
 import axios from 'axios'
 import Clothes from './components/clothes'
+import Accessories from './components/accessories'
 
 
 const App = () => {
 
-  // ========
-  // HOOKS ls
-  // ========
+  // ==================
+  // HOOKS FOR CLOTHES
+  // ==================
 
   const [clothes, setClothes] = useState([])
   // show
@@ -19,18 +20,13 @@ const App = () => {
 
   // const [showEdit, setShowEdit] = useState(false)
 
-  // new Cloth
+  // new Clothes
   const [newName, setNewName] = useState('')
   const [newPrice, setNewPrice] = useState()
   const [newStore, setNewStore] = useState('')
   const [newImage, setNewImage] = useState('')
   const [newLink, setNewLink] = useState('')
   const [newType, setNewType] = useState('')
-
-  const [users, setUsers] = useState([])
-  const [currentUser, setCurrentUser] = useState([])
-  const [newUser, setNewUser] = useState('')
-  const [newPassword, setNewPassword] = useState('')
 
   // update
   const [updatedName, setUpdatedName] = useState()
@@ -39,6 +35,38 @@ const App = () => {
   const [updatedImage, setUpdatedImage] = useState()
   const [updatedLink, setUpdatedLink] = useState()
   const [updatedType, setUpdatedType] = useState()
+
+  // =====================
+  // HOOKS FOR ACCESSORIES
+  // =====================
+  const [accessories, setAccessories] = useState([])
+
+  // show
+  const [showAddAccessories, setShowAddAccessories] = useState(false)
+
+  //new accessorie
+  const [newAccessorieName, setNewAccessorieName] = useState('')
+  const [newAccessoriePrice, setNewAccessoriePrice] = useState()
+  const [newAccessorieStore, setNewAccessorieStore] = useState('')
+  const [newAccessorieImage, setNewAccessorieImage] = useState('')
+  const [newAccessorieLink, setNewAccessorieLink] = useState('')
+  const [newAccessorieType, setNewAccessorieType] = useState('')
+
+  // update
+  const [updatedAccessorieName, setUpdatedAccessorieName] = useState()
+  const [updatedAccessoriePrice, setUpdatedAccessoriePrice] = useState()
+  const [updatedAccessorieStore, setUpdatedAccessorieStore] = useState()
+  const [updatedAccessorieImage, setUpdatedAccessorieImage] = useState()
+  const [updatedAccessorieLink, setUpdatedAccessorieLink] = useState()
+  const [updatedAccessorieType, setUpdatedAccessorieType] = useState()
+
+  // ==================
+  // HOOKS FOR LOGIN
+  // ==================
+  const [users, setUsers] = useState([])
+  const [currentUser, setCurrentUser] = useState([])
+  const [newUser, setNewUser] = useState('')
+  const [newPassword, setNewPassword] = useState('')
 
 // ==============
 // get functions
@@ -57,6 +85,11 @@ const getLogin = () => {
   setShowLogin(!showLogin)
   setShowAddForm(false)
   setShowSignUp(false)
+}
+
+// for accessories
+const getAddAccessorieForm = () => {
+  setShowAddAccessories(!showAddAccessories)
 }
 
 
@@ -117,6 +150,58 @@ const getLogin = () => {
     })
   }
 
+  // ================================
+  //        NEW FORM ACCESSORIES
+  // =================================
+  const handleNewAccessorieName = (event) => {
+    setNewAccessorieName(event.target.value)
+  }
+
+  const handleNewAccessoriePrice = (event) => {
+    setNewAccessoriePrice(event.target.value)
+  }
+
+  const handleNewAccessorieStore = (event) => {
+    setNewAccessorieStore(event.target.value)
+  }
+
+  const handleNewAccessorieImage = (event) => {
+    setNewAccessorieImage(event.target.value)
+  }
+
+  const handleNewAccessorieLink = (event) => {
+    setNewAccessorieLink(event.target.value)
+  }
+
+  const handleNewAccessorieType = (event) => {
+    setNewAccessorieType(event.target.value)
+  }
+
+  // handle new ACCESSORIES form
+  const handleNewAccessorie = (event) => {
+    event.preventDefault()
+    axios.post(
+      'http://localhost:3000/accessories',
+      {
+        name: newAccessorieName,
+        price: newAccessoriePrice,
+        store: newAccessorieStore,
+        image: newAccessorieImage,
+        link: newAccessorieLink,
+        type: newAccessorieType
+      }
+    ).then(() => {
+      axios
+        .get('http://localhost:3000/accessories')
+        .then((response) => {
+          setAccessories(response.data)
+        })
+    })
+  }
+
+  // ===============
+  //  USER HANDLER
+  // ===============
   const handleNewUser = (event) => {
     axios.post(
       'http://localhost:3000/users/new',
@@ -164,10 +249,9 @@ const getLogin = () => {
         })
     })
   }
-
-  // ========
-  // UPDATE
-  // ========
+  // ===============================
+  //        UPDATE CLOTHES
+  // ================================
   const handleUpdatedName = (event) => {
     setUpdatedName(event.target.value)
   }
@@ -212,10 +296,57 @@ const getLogin = () => {
           })
       })
   }
+  // ===================================
+  //          UPDATE ACCESSORIES
+  // ===================================
+  const handleUpdatedAccessorieName = (event) => {
+    setUpdatedAccessorieName(event.target.value)
+  }
 
-  // ========
-  // DELETE
-  // ========
+  const handleUpdatedAccessoriePrice = (event) => {
+    setUpdatedAccessoriePrice(event.target.value)
+  }
+
+  const handleUpdatedAccessorieStore = (event) => {
+    setUpdatedAccessorieStore(event.target.value)
+  }
+
+  const handleUpdatedAccessorieImage = (event) => {
+    setUpdatedAccessorieImage(event.target.value)
+  }
+
+  const handleUpdatedAccessorieLink = (event) => {
+    setUpdatedAccessorieLink(event.target.value)
+  }
+
+  const handleUpdatedAccessorieType = (event) => {
+    setUpdatedAccessorieType(event.target.value)
+  }
+
+  const handleUpdateAccessorie = (accessoriesData) => {
+    axios
+      .put(
+        `http://localhost:3000/accessories/${accessoriesData._id}`,
+        {
+          name: updatedAccessorieName,
+          price: updatedAccessoriePrice,
+          store: updatedAccessorieStore,
+          image: updatedAccessorieImage,
+          link: updatedAccessorieLink,
+          type: updatedAccessorieType
+        }
+      ).then((response) => {
+        axios
+          .get('http://localhost:3000/accessories')
+          .then((response) => {
+            setAccessories(response.data)
+          })
+      })
+  }
+
+  // ===============================
+  //        DELETE CLOTHES
+  // ===============================
   const handleDelete = (clothesData) => {
     axios
         .delete(`http://localhost:3000/boutique/${clothesData._id}`)
@@ -228,9 +359,30 @@ const getLogin = () => {
         })
   }
 
+  // ==============================
+  //        DELETE ACCESSORIE
+  // ===============================
+  const handleDeleteAccessorie = (accessoriesData) => {
+    axios
+        .delete(`http://localhost:3000/accessories/${accessoriesData._id}`)
+        .then(() => {
+          axios
+              .get('http://localhost:3000/accessories')
+              .then((response) => {
+                setAccessories(response.data)
+              })
+        })
+  }
+
 
 
   useEffect(() => {
+    axios
+      .get('http://localhost:3000/accessories')
+      .then((response) => {
+        console.log(response.data)
+        setAccessories(response.data)
+      })
     axios
       .get('http://localhost:3000/boutique')
       .then((response) => {
@@ -244,10 +396,13 @@ const getLogin = () => {
       })
   }, [])
 
+
+
   return (
     <main>
       <h1>Welcome, {users}</h1>
       <button onClick={getAddForm}>Add Clothes</button>
+      <button onClick={getAddAccessorieForm}>Add Accessories</button>
       <button onClick={getSignUp}>Sign Up</button>
       <button onClick={getLogin}>Login</button>
       <button onClick={() => {
@@ -322,11 +477,70 @@ const getLogin = () => {
         </div>
        </>  
       : null }
+
+
+        {showAddAccessories ?  
+        <>
+          <h2>Add New Accessories</h2>
+          <div className='container'>
+            <form className="row" onSubmit={handleNewAccessorie}>
+              
+              <div className="col-md-6">
+                <label className="form-label">Name</label> 
+                <input type="text" className="form-control" onChange={handleNewAccessorieName} /><br/>
+              </div>
+
+              <div className="col-md-6">
+                <label className="form-label">Name of Store</label>  
+                <input type="text" className="form-control" onChange={handleNewAccessorieStore} /><br/>
+              </div>
+
+              <div className="col-md-6">
+                <label className="form-label">Price</label>
+                <input type="number" className="form-control" onChange={handleNewAccessoriePrice}/><br/>
+              </div>
+
+              <div className="col-md-6">
+                <label className="form-label">Type/Category</label>  
+                <input type="text" className="form-control" onChange={handleNewAccessorieType} /><br/>
+              </div>
+
+              <div className="col-md-12">
+                <label className="form-label">Image Link</label>  
+                <input type="text" className="form-control" onChange={handleNewAccessorieImage} /><br/>
+              </div>
+
+              <div className="col-md-12">
+                <label className="form-label">Link to Store Site</label>  
+                <input type="text" className="form-control" onChange={handleNewAccessorieLink} /><br/>
+              </div>
+              
+              <div className="col-md-12"> 
+                <input type="submit" className="form-control btn-info" value="Add New Item" />
+              </div>
+
+            </form>
+          </div>
+        </>
+        : null }
+
+
       <div className="row row-cols-2 row-cols-md-3 g-4" >
         {
           clothes.map((clothes, i) => {
             return(
               <Clothes key={i} i={i} clothes={clothes} handleUpdate={handleUpdate} handleUpdatedName={handleUpdatedName} handleUpdatedPrice={handleUpdatedPrice} handleUpdatedStore={handleUpdatedStore} handleUpdatedImage={handleUpdatedImage} handleUpdatedLink={handleUpdatedLink} handleUpdatedType={handleUpdatedType} handleDelete={handleDelete}/>
+            )
+          })
+        }
+      </div>
+
+      <div className="row row-cols-2 row-cols-md-3 g-4" >
+        {console.log(accessories)}
+        {
+          accessories.map((accessories, i) => {
+            return(
+              <Accessories key={i} i={i} accessories={accessories} handleUpdateAccessorie={handleUpdateAccessorie} handleUpdatedAccessorieName={handleUpdatedAccessorieName} handleUpdatedAccessoriePrice={handleUpdatedAccessoriePrice} handleUpdatedAccessorieStore={handleUpdatedAccessorieStore} handleUpdatedAccessorieImage={handleUpdatedAccessorieImage} handleUpdatedAccessorieLink={handleUpdatedAccessorieLink} handleUpdatedAccessorieType={handleUpdatedAccessorieType} handleDeleteAccessorie={handleDeleteAccessorie}/>
             )
           })
         }
