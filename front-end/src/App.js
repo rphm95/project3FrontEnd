@@ -43,6 +43,7 @@ const App = () => {
 
   // show
   const [showAddAccessories, setShowAddAccessories] = useState(false)
+  const [showAccessories, setShowAccessories] = useState(false)
 
   //new accessorie
   const [newAccessorieName, setNewAccessorieName] = useState('')
@@ -85,6 +86,10 @@ const getLogin = () => {
   setShowLogin(!showLogin)
   setShowAddForm(false)
   setShowSignUp(false)
+}
+
+const getAccessories = () => {
+  setShowAccessories(!showAccessories)
 }
 
 // for accessories
@@ -339,6 +344,7 @@ const getAddAccessorieForm = () => {
         axios
           .get('http://localhost:3000/accessories')
           .then((response) => {
+            // console.log(response.data)
             setAccessories(response.data)
           })
       })
@@ -360,7 +366,7 @@ const getAddAccessorieForm = () => {
   }
 
   // ==============================
-  //        DELETE ACCESSORIE
+  //        DELETE ACCESSORIES
   // ===============================
   const handleDeleteAccessorie = (accessoriesData) => {
     axios
@@ -380,7 +386,7 @@ const getAddAccessorieForm = () => {
     axios
       .get('http://localhost:3000/accessories')
       .then((response) => {
-        console.log(response.data)
+        // console.log(response.data)
         setAccessories(response.data)
       })
     axios
@@ -392,7 +398,7 @@ const getAddAccessorieForm = () => {
       .get('http://localhost:3000/sessions/new', {withCredentials:true})
       .then((response) => {
         setUsers(response.data.username)
-        console.log(response.data)
+        // console.log(response.data)
       })
   }, [])
 
@@ -535,16 +541,17 @@ const getAddAccessorieForm = () => {
         }
       </div>
 
-      <div className="row row-cols-2 row-cols-md-3 g-4" >
-        {console.log(accessories)}
-        {
-          accessories.map((accessories, i) => {
-            return(
-              <Accessories key={i} i={i} accessories={accessories} handleUpdateAccessorie={handleUpdateAccessorie} handleUpdatedAccessorieName={handleUpdatedAccessorieName} handleUpdatedAccessoriePrice={handleUpdatedAccessoriePrice} handleUpdatedAccessorieStore={handleUpdatedAccessorieStore} handleUpdatedAccessorieImage={handleUpdatedAccessorieImage} handleUpdatedAccessorieLink={handleUpdatedAccessorieLink} handleUpdatedAccessorieType={handleUpdatedAccessorieType} handleDeleteAccessorie={handleDeleteAccessorie}/>
-            )
-          })
-        }
-      </div>
+      { showAccessories ? 
+        <div className="row row-cols-2 row-cols-md-3 g-4" >
+          {console.log(accessories)}
+          {
+            accessories.map((accessories, i) => {
+              return(
+                <Accessories key={i} i={i} accessories={accessories} handleUpdateAccessorie={handleUpdateAccessorie} handleUpdatedAccessorieName={handleUpdatedAccessorieName} handleUpdatedAccessoriePrice={handleUpdatedAccessoriePrice} handleUpdatedAccessorieStore={handleUpdatedAccessorieStore} handleUpdatedAccessorieImage={handleUpdatedAccessorieImage} handleUpdatedAccessorieLink={handleUpdatedAccessorieLink} handleUpdatedAccessorieType={handleUpdatedAccessorieType} handleDeleteAccessorie={handleDeleteAccessorie}/>
+              )
+            })
+          }
+        </div>: null }
 
 
     </main>

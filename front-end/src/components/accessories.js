@@ -25,7 +25,7 @@ const Accessories = (props) => {
                       <button className='btn btn-danger' onClick={(event) => {
                         props.handleDelete(props.accessories)
                       }}>Delete</button>
-                      <button className='btn btn-danger' data-bs-toggle="modal" data-bs-target={`#exampleModal${props.accessories._id}`}>Edit</button>
+                      <button className='btn btn-info' data-bs-toggle="modal" data-bs-target={`#exampleModal${props.accessories._id}`}>Edit</button>
                     </div> : <></>}
 
             {/* --------------- ACCESSORIES EDIT MODAL ------------------ */}
@@ -81,7 +81,7 @@ const Accessories = (props) => {
                     </div>
 
 
-                    
+
                 </div>
             </div>
         </div>
