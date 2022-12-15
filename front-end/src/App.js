@@ -439,18 +439,16 @@ const getAccessories = () => {
           <div className='logo'>
             {/* <h1 id="boutique"><em>La Boutique!</em></h1> */}
             <img id="logo" src="https://img.freepik.com/premium-vector/luxury-boutique-logo-templates_15146-128.jpg?w=2000"></img>
-            <h1 id="boutique" style={{position:"relative", top:"70px"}}><strong><em>Welcome , </em>{users}</strong></h1>
-            <ul>
-                <li onClick={() => {
-                  handleSessionsDelete()
-                }} style={{height:"3rem"}}><strong>Log Out</strong></li>
-                <li onClick={getAccessories} style={{height:"3rem"}}><strong>Accessories</strong></li>
-                <li onClick={getClothes} style={{height:"3rem"}}><strong>Clothes</strong></li>
-                {showClothes ? <li onClick={getAddForm} style={{height:"3rem"}}><strong>Add Clothes</strong></li> : null}
-                {showAccessories ? <li onClick={getAddAccessorieForm} style={{height:"3rem"}}><strong>Add Accessories</strong></li> : null}
-      
-              </ul>
-        
+                <h1 id="boutique" style={{position:"relative", top:"70px"}}><strong><em>Welcome , </em>{users}</strong></h1>
+                <ul>
+                  <li onClick={() => {
+                    handleSessionsDelete()
+                  }} style={{height:"3rem"}}><strong>Log Out</strong></li>
+                  <li onClick={getAccessories} style={{height:"3rem"}}><strong>Accessories</strong></li>
+                  <li onClick={getClothes} style={{height:"3rem"}}><strong>Clothes</strong></li>
+                  {showClothes ? <li onClick={getAddForm} style={{height:"3rem"}}><strong>Add Clothes</strong></li> : null}
+                  {showAccessories ? <li onClick={getAddAccessorieForm} style={{height:"3rem"}}><strong>Add Accessories</strong></li> : null}
+                </ul>
           </div>
         </nav>
 
@@ -491,7 +489,7 @@ const getAccessories = () => {
             </div>
             
             <div className="col-md-12"> 
-              <input type="submit" className="form-control btn-info" value="Add New Item" />
+              <input type="submit" className="form-control btn-info" id="bt1" value="Add New Item" />
             </div>
 
           </form>
@@ -537,7 +535,7 @@ const getAccessories = () => {
               </div>
               
               <div className="col-md-12"> 
-                <input type="submit" className="form-control btn-dark" value="Add New Accessories" />
+                <input type="submit" className="form-control btn-dark" id="bt2" value="Add New Accessories" />
               </div>
 
             </form>
@@ -547,53 +545,56 @@ const getAccessories = () => {
 
       {showClothes ? 
       <>
-        <div className="row row-cols-2 row-cols-md-3 g-4" >
+        <div className="container">
+          <div className="row row-cols-2 row-cols-md-3 g-4" >
+              {
+                clothes.map((clothes, i) => {
+                  return(
+                    <Clothes key={i} i={i} clothes={clothes} handleUpdate={handleUpdate} handleUpdatedName={handleUpdatedName} handleUpdatedPrice={handleUpdatedPrice} handleUpdatedStore={handleUpdatedStore} handleUpdatedImage={handleUpdatedImage} handleUpdatedLink={handleUpdatedLink} handleUpdatedType={handleUpdatedType} handleDelete={handleDelete} setClothes={setClothes}/>
+                  )
+                })
+              }
+        </div></div></> : null}
+
+      { showAccessories ? 
+        <div className="container">
+          <div className="row row-cols-2 row-cols-md-3 g-4" >
             {
-              clothes.map((clothes, i) => {
+              accessories.map((accessories, i) => {
                 return(
-                  <Clothes key={i} i={i} clothes={clothes} handleUpdate={handleUpdate} handleUpdatedName={handleUpdatedName} handleUpdatedPrice={handleUpdatedPrice} handleUpdatedStore={handleUpdatedStore} handleUpdatedImage={handleUpdatedImage} handleUpdatedLink={handleUpdatedLink} handleUpdatedType={handleUpdatedType} handleDelete={handleDelete} setClothes={setClothes}/>
+                  <Accessories key={i} i={i} accessories={accessories} handleUpdateAccessorie={handleUpdateAccessorie} handleUpdatedAccessorieName={handleUpdatedAccessorieName} handleUpdatedAccessoriePrice={handleUpdatedAccessoriePrice} handleUpdatedAccessorieStore={handleUpdatedAccessorieStore} handleUpdatedAccessorieImage={handleUpdatedAccessorieImage} handleUpdatedAccessorieLink={handleUpdatedAccessorieLink} handleUpdatedAccessorieType={handleUpdatedAccessorieType} handleDeleteAccessories={handleDeleteAccessories} setAccessories={setAccessories}/>
                 )
               })
             }
-          </div>
-        </> : null}
-
-      { showAccessories ? 
-        <div className="row row-cols-2 row-cols-md-3 g-4" >
-          {
-            accessories.map((accessories, i) => {
-              return(
-                <Accessories key={i} i={i} accessories={accessories} handleUpdateAccessorie={handleUpdateAccessorie} handleUpdatedAccessorieName={handleUpdatedAccessorieName} handleUpdatedAccessoriePrice={handleUpdatedAccessoriePrice} handleUpdatedAccessorieStore={handleUpdatedAccessorieStore} handleUpdatedAccessorieImage={handleUpdatedAccessorieImage} handleUpdatedAccessorieLink={handleUpdatedAccessorieLink} handleUpdatedAccessorieType={handleUpdatedAccessorieType} handleDeleteAccessories={handleDeleteAccessories} setAccessories={setAccessories}/>
-              )
-            })
-          }
-        </div>: null }
+         </div></div>: null }
       </> : <>
       {/* <h1 id="boutique"><em>La Boutique!</em></h1> */}
-      <button onClick={getSignUp}>Sign Up</button>
-      <button onClick={getLogin}>Login</button>
-      <div id="carouselExampleSlidesOnly" className="carousel slide" data-bs-ride="carousel" style={{width: "90%", margin: "auto", marginTop: "2%", height: "400px"}}>
+      <div className='container' style={{marginTop: "2%"}}>
+        <button className='btn' onClick={getSignUp} id="bt3">Sign Up</button>
+        <button className='btn' onClick={getLogin} id="bt4">Login</button>
+      </div>
+      <div id="carouselExampleSlidesOnly" className="carousel slide" data-bs-ride="carousel" style={{width: "90%", margin: "auto", marginTop: "5%", height: "20rem"}}>
         <div className="carousel-inner">
           <div className="carousel-item active">
             <img src="https://img.freepik.com/vetores-gratis/fundo-do-conceito-boutique-loja-fachada-com-tabuleta_1441-2619.jpg?w=2000" className="d-block w-100" alt="..."/>
           </div>
           <div className="carousel-item">
-            <img src="https://img03.shop-pro.jp/PA01003/897/etc/1.jpg?cmsp_timestamp=20190312200659" className="d-block w-100" alt="..."/>
+            <img src="https://www.mesdemoisellesparis.com/img/cms/BOUTIQUES/cambon-boutique-paris.jpg" style={{height:"300px"}} className="d-block w-100" alt="..."/>
           </div>
           <div className="carousel-item">
-            <img src="https://image.uniqlo.com/UQ/ST3/WesternCommon/imagesgoods/450567/item/goods_02_450567.jpg?width=850" className="d-block w-100" alt="..."/>
+            <img src="https://www.cristaleriamadrid.es/uploads/paginas/escaparate-tienda.jpg" style={{height:"250px"}} className="d-block w-100" alt="..."/>
           </div>
         </div>
       </div>
       {showLogin ? 
       <>
-        <h2>Log In Now!</h2>
+        <h2>Log In</h2>
         <form onSubmit={handleLogin}>
-          <label>Username: </label>
-          <input type='text' onChange={handleNewUsername}></input><br></br>
-          <label>Password: </label>
-          <input type='password' onChange={handleNewPassword}></input><br></br>
-          <input type='submit' value='Login'></input>
+          <label className='label'>Username: </label>
+          <input className="input" type='text' onChange={handleNewUsername}/><br></br>
+          <label className='label'>Password: </label>
+          <input className="input" type='password' onChange={handleNewPassword}/><br></br>
+          <input type='submit' value='Login' className="btn btn-success" id="bt14"></input>
         </form>
       </> : <></>}</>}
       
@@ -602,11 +603,11 @@ const getAccessories = () => {
       <>
         <h2>Sign Up Form</h2>
         <form onSubmit={handleNewUser}>
-          <label>Username: </label>
-          <input type='text' onChange={handleNewUsername}></input><br></br>
-          <label>Password: </label>
-          <input type='password' onChange={handleNewPassword}></input><br></br>
-          <input type='submit' value='Sign Up'></input>
+          <label className='label'>Username: </label>
+          <input className="input" type='text' onChange={handleNewUsername}></input><br></br>
+          <label className='label'>Password: </label>
+          <input className="input" type='password' onChange={handleNewPassword}></input><br></br>
+          <input type='submit' id="bt15" className="btn btn-success" value='Sign Up'></input>
         </form>
       </> : <></>}
 
