@@ -437,7 +437,6 @@ const getAccessories = () => {
       {users ? <>
         <nav>
           <div className='logo'>
-            {/* <h1 id="boutique"><em>La Boutique!</em></h1> */}
             <img id="logo" src="https://img.freepik.com/premium-vector/luxury-boutique-logo-templates_15146-128.jpg?w=2000"></img>
                 <h1 id="boutique" style={{position:"relative", top:"70px"}}><strong><em>Welcome , </em>{users}</strong></h1>
                 <ul className="menu-list">
@@ -570,26 +569,29 @@ const getAccessories = () => {
       </> : <>
       {/* <h1 id="boutique"><em>La Boutique!</em></h1> */}
       <div className='container' style={{marginTop: "2%"}}>
+        <h1 id="boutiquee">La Boutique</h1>
         <button className='btn' onClick={getSignUp} id="bt3">Sign Up</button>
         <button className='btn' onClick={getLogin} id="bt4">Login</button>
       </div>
-      <div id="carouselExampleSlidesOnly" className="carousel slide" data-bs-ride="carousel" style={{width: "90%", margin: "auto", marginTop: "5%", height: "20rem"}}>
-        <div className="carousel-inner">
-          <div className="carousel-item active">
-            <img src="https://img.freepik.com/vetores-gratis/fundo-do-conceito-boutique-loja-fachada-com-tabuleta_1441-2619.jpg?w=2000" className="d-block w-100" alt="..."/>
-          </div>
-          <div className="carousel-item">
-            <img src="https://www.mesdemoisellesparis.com/img/cms/BOUTIQUES/cambon-boutique-paris.jpg" style={{height:"300px"}} className="d-block w-100" alt="..."/>
-          </div>
-          <div className="carousel-item">
-            <img src="https://www.cristaleriamadrid.es/uploads/paginas/escaparate-tienda.jpg" style={{height:"250px"}} className="d-block w-100" alt="..."/>
+      <div className="containerr">
+        <div id="carouselExampleSlidesOnly" className="carousel slide" data-bs-ride="carousel" style={{width: "90%", margin: "auto", marginTop: "5%", height: "20rem", objectFit: "cover", border: "5px solid black"}}>
+          <div className="carousel-inner">
+            <div className="carousel-item active">
+              <img style={{height:"310px"}} src="https://img.freepik.com/vetores-gratis/fundo-do-conceito-boutique-loja-fachada-com-tabuleta_1441-2619.jpg?w=2000" className="d-block w-100" alt="..."/>
+            </div>
+            <div className="carousel-item active">
+              <img src="https://www.mesdemoisellesparis.com/img/cms/BOUTIQUES/cambon-boutique-paris.jpg" style={{height:"310px"}} className="d-block w-100" alt="..."/>
+            </div>
+            <div className="carousel-item">
+              <img src="https://www.cristaleriamadrid.es/uploads/paginas/escaparate-tienda.jpg" style={{height:"310px"}} className="d-block w-100" alt="..."/>
+            </div>
           </div>
         </div>
       </div>
       {showLogin ? 
       <>
-        <h2>Log In</h2>
-        <form onSubmit={handleLogin}>
+        <form onSubmit={handleLogin} className="login">
+          <h2>Log In</h2>
           <label className='label'>Username: </label>
           <input className="input" type='text' onChange={handleNewUsername}/><br></br>
           <label className='label'>Password: </label>
@@ -601,8 +603,8 @@ const getAccessories = () => {
 
       {showSignUp ? 
       <>
-        <h2>Sign Up Form</h2>
-        <form onSubmit={handleNewUser}>
+        <form onSubmit={handleNewUser} className="signUp">
+          <h2>Sign Up Form</h2>
           <label className='label'>Username: </label>
           <input className="input" type='text' onChange={handleNewUsername}></input><br></br>
           <label className='label'>Password: </label>
