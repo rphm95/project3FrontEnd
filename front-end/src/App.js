@@ -433,21 +433,21 @@ const getAccessories = () => {
 
 
   return (
-    <main>
+    <section>
       {users ? <>
         <nav>
           <div className='logo'>
             {/* <h1 id="boutique"><em>La Boutique!</em></h1> */}
             <img id="logo" src="https://img.freepik.com/premium-vector/luxury-boutique-logo-templates_15146-128.jpg?w=2000"></img>
                 <h1 id="boutique" style={{position:"relative", top:"70px"}}><strong><em>Welcome , </em>{users}</strong></h1>
-                <ul>
-                  <li onClick={() => {
+                <ul className="menu-list">
+                  <li className="menu" onClick={() => {
                     handleSessionsDelete()
                   }} style={{height:"3rem"}}><strong>Log Out</strong></li>
-                  <li onClick={getAccessories} style={{height:"3rem"}}><strong>Accessories</strong></li>
-                  <li onClick={getClothes} style={{height:"3rem"}}><strong>Clothes</strong></li>
-                  {showClothes ? <li onClick={getAddForm} style={{height:"3rem"}}><strong>Add Clothes</strong></li> : null}
-                  {showAccessories ? <li onClick={getAddAccessorieForm} style={{height:"3rem"}}><strong>Add Accessories</strong></li> : null}
+                  <li className="menu" onClick={getAccessories} style={{height:"3rem"}}><strong>Accessories</strong></li>
+                  <li className="menu" onClick={getClothes} style={{height:"3rem"}}><strong>Clothes</strong></li>
+                  {showClothes ? <li className="menu" onClick={getAddForm} style={{height:"3rem"}}><strong>Add Clothes</strong></li> : null}
+                  {showAccessories ? <li className="menu" onClick={getAddAccessorieForm} style={{height:"3rem"}}><strong>Add Accessories</strong></li> : null}
                 </ul>
           </div>
         </nav>
@@ -610,8 +610,29 @@ const getAccessories = () => {
           <input type='submit' id="bt15" className="btn btn-success" value='Sign Up'></input>
         </form>
       </> : <></>}
-
-    </main>
+        
+      <footer>
+        <div className="card text-center" id="footer" style={{marginTop: "20vh"}}>
+          <div className="card-header" id="h5">
+            La Boutique
+          </div>
+          <div className="card-body">
+            <h5 className="card-title" id="h5">Contact Infomation</h5>
+            <p className="card-text" id="p">Got any questions? Feel free to contact us at any of these links.</p>
+            <ul className="socials">
+              <li><a href="https://github.com/rphm95"><i className="fa fa-github"></i></a></li>
+              <li><a href="https://github.com/mnmmar"><i className="fa fa-github"></i></a></li>
+              <li><a href="https://www.linkedin.com/in/rafaela-hollanda"><i className="fa fa-linkedin-square"></i></a></li>
+              <li href="https://www.linkedin.com/in/marmar-min"><a><i className="fa fa-linkedin-square"></i></a></li>
+            </ul>
+          </div>
+          <div className="card-footer text-muted">
+            c 2022 Developed by Rafaela Hollanda and Mar Mar Min using Node.js, Express.js, React, MongoDB and BootStrap.
+          </div>
+        </div>
+      </footer>
+    </section>
+    
   )
 }
 

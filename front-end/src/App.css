@@ -86,7 +86,7 @@ nav {
 #align{
   display: flex;
 }
-ul {
+.menu-list {
   list-style: none;
   position: absolute;
   right: 0px;
@@ -100,7 +100,7 @@ ul {
   flex-direction: row-reverse;
 }
 
-li{
+.menu{
   margin-right: 1rem;
 }
 
@@ -173,6 +173,50 @@ h2{
 
 #bt3, #bt4{
   background-color:  rgb(251, 146, 150);
+}
+
+#h5{
+  /* color: rgb(207, 203, 203); */
+  font-weight: bold;
+}
+
+#p{
+  color: rgb(163, 160, 160);
+}
+
+.socials{
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 1rem 0 3rem 0;
+  color: black;
+}
+.socials li{
+  margin: 0 10px;
+}
+
+.socials a{
+  text-decoration: none;
+  color: rgb(3, 2, 2);
+  border: 1.1px solid rgb(24, 19, 19);
+  padding: 5px;
+
+  border-radius: 50%;
+
+}
+.socials a i{
+  font-size: 1.1rem;
+  width: 20px;
+  transition: color .4s ease;
+
+}
+.socials a:hover i{
+  color: aqua;
+}
+
+#footer{
+  background-color: rgb(243, 216, 220);
 }
 
 @media only screen and (max-width: 600px){
