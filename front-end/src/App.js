@@ -17,8 +17,6 @@ const App = () => {
   const [showSignUp, setShowSignUp] = useState(false);
   const [showLogin, setShowLogin] = useState(false);
 
-  // const [showEdit, setShowEdit] = useState(false)
-
   // new Clothes
   const [newName, setNewName] = useState('')
   const [newPrice, setNewPrice] = useState()
@@ -73,8 +71,8 @@ const App = () => {
 // ==============
 const getAddForm = () => {
   setShowAddForm(!showAddForm)
-  setShowClothes(false)
   setShowAddAccessories(false)
+
 }
 
 const getSignUp = () => {
@@ -82,6 +80,7 @@ const getSignUp = () => {
   setShowAddForm(false)
   setShowLogin(false)
   setShowClothes(false)
+
 }
 
 const getLogin = () => {
@@ -89,11 +88,17 @@ const getLogin = () => {
   setShowAddForm(false)
   setShowSignUp(false)
   setShowClothes(false)
+
 }
 
 const getClothes = () => {
   setShowClothes(!showClothes)
   setShowAccessories(false)
+  setShowAddAccessories(false)
+  if(showAddForm === true) {
+    setShowAddForm(false)
+  }
+
 }
 
 // for accessories
@@ -101,12 +106,16 @@ const getAddAccessorieForm = () => {
   setShowAddAccessories(!showAddAccessories)
   setShowClothes(false)
   setShowAddForm(false)
-  
+
   
 }
 const getAccessories = () => {
   setShowAccessories(!showAccessories)
   setShowClothes(false)
+  setShowAddForm(false)
+  if(showAddAccessories=== true) {
+    setShowAddAccessories(false)
+  }
 }
 
 
@@ -425,33 +434,26 @@ const getAccessories = () => {
 
   return (
     <main>
-      {/* <h1>Welcome, {users}</h1> */}
-
-      {/* <div id="carouselExampleSlidesOnly" className="carousel slide" data-bs-ride="carousel" style={{width: "90%", margin: "auto", marginTop: "2%", height: "400px"}}>
-        <div className="carousel-inner">
-          <div className="carousel-item active">
-            <img src="https://img.freepik.com/vetores-gratis/fundo-do-conceito-boutique-loja-fachada-com-tabuleta_1441-2619.jpg?w=2000" className="d-block w-100" alt="..."/>
-          </div>
-          <div className="carousel-item">
-            <img src="https://img03.shop-pro.jp/PA01003/897/etc/1.jpg?cmsp_timestamp=20190312200659" className="d-block w-100" alt="..."/>
-          </div>
-          <div className="carousel-item">
-            <img src="https://image.uniqlo.com/UQ/ST3/WesternCommon/imagesgoods/450567/item/goods_02_450567.jpg?width=850" className="d-block w-100" alt="..."/>
-          </div>
-        </div>
-      </div>
-      {console.log(users)} */}
       {users ? <>
-        <h1>Welcome, {users}</h1>
-        <button onClick={() => {
-        handleSessionsDelete()
-      }}>Log Out</button>
-        <div>
-          <button onClick={getAddForm}>Add Clothes</button>
-          <button onClick={getAddAccessorieForm}>Add Accessories</button>
-          <button onClick={getAccessories}>Accessories</button>
-          <button onClick={getClothes}>Clothes</button>
-        </div>
+        <nav>
+          <div className='logo'>
+            {/* <h1 id="boutique"><em>La Boutique!</em></h1> */}
+            <img id="logo" src="https://img.freepik.com/premium-vector/luxury-boutique-logo-templates_15146-128.jpg?w=2000"></img>
+            <h1 id="boutique" style={{position:"relative", top:"70px"}}><strong><em>Welcome , </em>{users}</strong></h1>
+            <ul>
+                <li onClick={() => {
+                  handleSessionsDelete()
+                }} style={{height:"3rem"}}><strong>Log Out</strong></li>
+                <li onClick={getAccessories} style={{height:"3rem"}}><strong>Accessories</strong></li>
+                <li onClick={getClothes} style={{height:"3rem"}}><strong>Clothes</strong></li>
+                {showClothes ? <li onClick={getAddForm} style={{height:"3rem"}}><strong>Add Clothes</strong></li> : null}
+                {showAccessories ? <li onClick={getAddAccessorieForm} style={{height:"3rem"}}><strong>Add Accessories</strong></li> : null}
+      
+              </ul>
+        
+          </div>
+        </nav>
+
         {showAddForm ?
        <>
         <h2>Add New Item</h2>
@@ -544,15 +546,17 @@ const getAccessories = () => {
         : null }
 
       {showClothes ? 
+      <>
         <div className="row row-cols-2 row-cols-md-3 g-4" >
-          {
-            clothes.map((clothes, i) => {
-              return(
-                <Clothes key={i} i={i} clothes={clothes} handleUpdate={handleUpdate} handleUpdatedName={handleUpdatedName} handleUpdatedPrice={handleUpdatedPrice} handleUpdatedStore={handleUpdatedStore} handleUpdatedImage={handleUpdatedImage} handleUpdatedLink={handleUpdatedLink} handleUpdatedType={handleUpdatedType} handleDelete={handleDelete} setClothes={setClothes}/>
-              )
-            })
-          }
-        </div> : null}
+            {
+              clothes.map((clothes, i) => {
+                return(
+                  <Clothes key={i} i={i} clothes={clothes} handleUpdate={handleUpdate} handleUpdatedName={handleUpdatedName} handleUpdatedPrice={handleUpdatedPrice} handleUpdatedStore={handleUpdatedStore} handleUpdatedImage={handleUpdatedImage} handleUpdatedLink={handleUpdatedLink} handleUpdatedType={handleUpdatedType} handleDelete={handleDelete} setClothes={setClothes}/>
+                )
+              })
+            }
+          </div>
+        </> : null}
 
       { showAccessories ? 
         <div className="row row-cols-2 row-cols-md-3 g-4" >
@@ -565,7 +569,7 @@ const getAccessories = () => {
           }
         </div>: null }
       </> : <>
-      <h1 id="boutique"><em>La Boutique!</em></h1>
+      {/* <h1 id="boutique"><em>La Boutique!</em></h1> */}
       <button onClick={getSignUp}>Sign Up</button>
       <button onClick={getLogin}>Login</button>
       <div id="carouselExampleSlidesOnly" className="carousel slide" data-bs-ride="carousel" style={{width: "90%", margin: "auto", marginTop: "2%", height: "400px"}}>
