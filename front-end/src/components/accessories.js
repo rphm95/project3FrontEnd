@@ -1,19 +1,36 @@
 import React from 'react';
 import {useState} from 'react';
+import axios from 'axios';
 
 const Accessories = (props) => {
     const [showInfoAccessories, setShowInfoAccessories] = useState(false)
-    // const [showEditAccessories, setShowEditAccessories] = useState(false)
+   
 
     const showDescriptionAccessories = () => {
         setShowInfoAccessories(!showInfoAccessories);
     }
 
+    const handleUpdateLikeAccessories = (accessoriesData) => {
+      axios
+          .put(`http://localhost:3000/accessories/${accessoriesData._id}`, 
+          {
+            like: !accessoriesData.like
+          })
+          .then((response) => {
+            axios
+                .get('http://localhost:3000/accessories')
+                .then((response) => {
+                  props.setAccessories(response.data)
+                })
+          })
+    }
+
+
     return (
         // <div className="col">
             <div className="card" style={{width: "18 rem"}} id="margin">
                 <h2>{props.accessories.store}</h2>
-                <img src={props.accessories.image} className="card-img-top" onClick={showDescriptionAccessories}/>
+                <img src={props.accessories.image} className="card-img-top" alt="..." onClick={showDescriptionAccessories}/>
                 <div className='card-body'>
                     <h5 className="card-title" onClick={showDescriptionAccessories}>{props.accessories.name}</h5>
 
@@ -21,9 +38,13 @@ const Accessories = (props) => {
                     <div>
                       <h5>{props.accessories.type}</h5>
                       <p className='card-text'>${props.accessories.price}</p>
+
+                      {props.accessories.like ? <><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f1/Heart_coraz%C3%B3n.svg/800px-Heart_coraz%C3%B3n.svg.png" alt="..." style={{width:"30px", height:"30px", marginBottom:"2%"}} onClick={() => {handleUpdateLikeAccessories(props.accessories)}}></img><br></br></> : <><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/03/Heart_empty_font_awesome.svg/2048px-Heart_empty_font_awesome.svg.png" alt="..." style={{width:"30px", height:"30px", marginBottom:"2%"}} onClick={() => {handleUpdateLikeAccessories(props.accessories)}}></img><br></br></>}
+
+
                       <a href={props.accessories.link} className='btn btn-success'>Ready to Buy?</a>
                       <button className='btn btn-danger' onClick={(event) => {
-                        props.handleDelete(props.accessories)
+                        props.handleDeleteAccessories(props.accessories)
                       }}>Delete</button>
                       <button className='btn btn-info' data-bs-toggle="modal" data-bs-target={`#exampleModal${props.accessories._id}`}>Edit</button>
                     </div> : <></>}
