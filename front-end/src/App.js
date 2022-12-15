@@ -159,7 +159,7 @@ const getAccessories = () => {
   const handleNewClothes = (event) => {
     event.preventDefault()
     axios.post(
-      'http://localhost:3000/boutique',
+      'https://gentle-island-40061.herokuapp.com/boutique',
       {
         name: newName,
         price: newPrice,
@@ -170,7 +170,7 @@ const getAccessories = () => {
       }
     ).then(() => {
       axios
-        .get('http://localhost:3000/boutique')
+        .get('https://gentle-island-40061.herokuapp.com/boutique')
         .then((response) => {
           setClothes(response.data)
         })
@@ -208,7 +208,7 @@ const getAccessories = () => {
   const handleNewAccessorie = (event) => {
     event.preventDefault()
     axios.post(
-      'http://localhost:3000/accessories',
+      'https://gentle-island-40061.herokuapp.com/accessories',
       {
         name: newAccessorieName,
         price: newAccessoriePrice,
@@ -219,7 +219,7 @@ const getAccessories = () => {
       }
     ).then(() => {
       axios
-        .get('http://localhost:3000/accessories')
+        .get('https://gentle-island-40061.herokuapp.com/accessories')
         .then((response) => {
           setAccessories(response.data)
         })
@@ -231,14 +231,14 @@ const getAccessories = () => {
   // ===============
   const handleNewUser = (event) => {
     axios.post(
-      'http://localhost:3000/users/new',
+      'https://gentle-island-40061.herokuapp.com/users/new',
       {
         username: newUser,
         password: newPassword
       }, {withCredentials:true}
     ).then(() => {
       axios
-        .get('http://localhost:3000/users/new')
+        .get('https://gentle-island-40061.herokuapp.com/users/new')
         .then((response) => {
           console.log(response.data)
         })
@@ -249,14 +249,14 @@ const getAccessories = () => {
   const handleLogin = (event) => {
     event.preventDefault()
     axios.post(
-      'http://localhost:3000/sessions/userLogin',
+      'https://gentle-island-40061.herokuapp.com/sessions/userLogin',
       {
         username: newUser,
         password: newPassword
       }, {withCredentials:true}
     ).then(() => {
       axios
-        .get('http://localhost:3000/sessions/new', {withCredentials:true})
+        .get('https://gentle-island-40061.herokuapp.com/sessions/new', {withCredentials:true})
         .then((response) => {
           console.log(response.data)
           setUsers(response.data.username)
@@ -267,10 +267,10 @@ const getAccessories = () => {
 
   const handleSessionsDelete = (event) => {
     axios.delete(
-      'http://localhost:3000/sessions/', {withCredentials:true}
+      'https://gentle-island-40061.herokuapp.com/sessions/', {withCredentials:true}
     ).then(() => {
       axios
-        .get('http://localhost:3000/sessions/new')
+        .get('https://gentle-island-40061.herokuapp.com/sessions/new')
         .then((response) => {
           console.log(response)
           setUsers('')
@@ -312,7 +312,7 @@ const getAccessories = () => {
   const handleUpdate = (clothesData) => {
     axios
       .put(
-        `http://localhost:3000/boutique/${clothesData._id}`,
+        `https://gentle-island-40061.herokuapp.com/boutique/${clothesData._id}`,
         {
           name: updatedName,
           price: updatedPrice,
@@ -323,7 +323,7 @@ const getAccessories = () => {
         }
       ).then((response) => {
         axios
-          .get('http://localhost:3000/boutique')
+          .get('https://gentle-island-40061.herokuapp.com/boutique')
           .then((response) => {
             setClothes(response.data)
           })
@@ -359,7 +359,7 @@ const getAccessories = () => {
   const handleUpdateAccessorie = (accessoriesData) => {
     axios
       .put(
-        `http://localhost:3000/accessories/${accessoriesData._id}`,
+        `https://gentle-island-40061.herokuapp.com/accessories/${accessoriesData._id}`,
         {
           name: updatedAccessorieName,
           price: updatedAccessoriePrice,
@@ -370,7 +370,7 @@ const getAccessories = () => {
         }
       ).then((response) => {
         axios
-          .get('http://localhost:3000/accessories')
+          .get('https://gentle-island-40061.herokuapp.com/accessories')
           .then((response) => {
             // console.log(response.data)
             setAccessories(response.data)
@@ -383,10 +383,10 @@ const getAccessories = () => {
   // ===============================
   const handleDelete = (clothesData) => {
     axios
-        .delete(`http://localhost:3000/boutique/${clothesData._id}`)
+        .delete(`https://gentle-island-40061.herokuapp.com/boutique/${clothesData._id}`)
         .then(() => {
           axios
-              .get('http://localhost:3000/boutique')
+              .get('https://gentle-island-40061.herokuapp.com/boutique')
               .then((response) => {
                 setClothes(response.data)
               })
@@ -398,10 +398,10 @@ const getAccessories = () => {
   // ===============================
   const handleDeleteAccessories = (accessoriesData) => {
     axios
-        .delete(`http://localhost:3000/accessories/${accessoriesData._id}`)
+        .delete(`https://gentle-island-40061.herokuapp.com/accessories/${accessoriesData._id}`)
         .then(() => {
           axios
-              .get('http://localhost:3000/accessories')
+              .get('https://gentle-island-40061.herokuapp.com/accessories')
               .then((response) => {
                 setAccessories(response.data)
               })
@@ -412,18 +412,18 @@ const getAccessories = () => {
 
   useEffect(() => {
     axios
-      .get('http://localhost:3000/accessories')
+      .get('https://gentle-island-40061.herokuapp.com/accessories')
       .then((response) => {
         // console.log(response.data)
         setAccessories(response.data)
       })
     axios
-      .get('http://localhost:3000/boutique')
+      .get('https://gentle-island-40061.herokuapp.com/boutique')
       .then((response) => {
         setClothes(response.data)
       })
       axios
-      .get('http://localhost:3000/sessions/new', {withCredentials:true})
+      .get('https://gentle-island-40061.herokuapp.com/sessions/new', {withCredentials:true})
       .then((response) => {
         setUsers(response.data.username)
         // console.log(response.data)
