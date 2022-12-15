@@ -39,6 +39,7 @@
 
 body {
   text-align: center;
+  background-color: rgb(240, 201, 202);
 }
 
 button, input {
@@ -60,4 +61,32 @@ button, input {
 
 #boutique{
   font-family: cursive;
+}
+
+nav {
+  text-align: left;
+  background-color: white;
+}
+
+#logo {
+  width: 40%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.logo {
+  display: flex;
+  border-bottom: 4px solid rgb(251, 146, 150);
+}
+
+ul {
+  list-style: none;
+  position: absolute;
+  right: 0px;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  font-size: 20px;
+  justify-content: space-around;
+  text-decoration: underline;
+  cursor: pointer;
 }
