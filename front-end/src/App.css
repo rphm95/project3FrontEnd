@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Corinthia:wght@400;700&family=Parisienne&display=swap');
+
 .App {
   text-align: center;
 }
@@ -39,17 +41,17 @@
 
 body {
   text-align: center;
-  background-color: rgb(240, 201, 202);
+  background-image: url("https://wallpaperset.com/w/full/e/e/1/491384.jpg");
+  background-repeat: no-repeat;
+  background-position:center;
+  background-size: cover;
+  background-color: rgb(255, 255, 255);
 }
 
 button, input {
   margin: 1%;
 }
 
-
-#margin {
-  margin-right: 2%;
-}
 
 #card-size{
   width: 100%;
@@ -60,7 +62,10 @@ button, input {
 }
 
 #boutique{
-  font-family: cursive;
+  font-family: 'Parisienne', cursive;
+  font-size: 3rem;
+  letter-spacing: 2px;
+  display: flex;
 }
 
 nav {
@@ -78,15 +83,106 @@ nav {
   display: flex;
   border-bottom: 4px solid rgb(251, 146, 150);
 }
-
+#align{
+  display: flex;
+}
 ul {
   list-style: none;
   position: absolute;
   right: 0px;
   text-transform: uppercase;
-  letter-spacing: 4px;
-  font-size: 20px;
+  letter-spacing: 3px;
+  font-size: 1rem;
   justify-content: space-around;
-  text-decoration: underline;
   cursor: pointer;
+  text-decoration: none;
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+li{
+  margin-right: 1rem;
+}
+
+li:after {
+  content: '';
+  display: block;
+  width: 0%;
+  height: 2px;
+  margin-top: 0.1em;
+  background: rgb(251, 146, 150);
+  transition: 0.7s ease-in-out;
+}
+
+li:hover:after{
+  width:90%;
+}
+
+
+#animation:after {
+  content: '';
+  display: block;
+  width: 0%;
+  height: 2px;
+  margin-top: 0.1em;
+  background: rgb(251, 146, 150);
+  transition: 0.7s ease-in-out;
+}
+
+#animation:hover:after{
+  width:100%;
+}
+
+
+#bt1, #bt2, #bt3, #bt4, #bt5, #bt6, #bt7, #bt8, #bt9, #bt10, #bt11, #bt12, #bt13, #bt14, #bt15{
+  transform: translate(0);
+  overflow: hidden;
+  cursor:pointer;
+}
+
+#bt1::before, #bt2::before, #bt3::before, #bt4::before, #bt5::before, #bt6::before, #bt7::before, #bt8::before, #bt9::before, #bt10::before, #bt11::before, #bt12::before, #bt13::before, #bt14::before, #bt15::before{
+  content: "";
+  position: absolute;
+  background: rgb(251, 253, 251);
+  width: 8px;
+  top: 0;
+  bottom: 0;
+  left: -32px;
+  transform: rotate(-16deg);
+  filter: blur(6px);
+}
+
+#bt1:hover::before, #bt2:hover::before, #bt3:hover::before, #bt4:hover::before, #bt5:hover::before, #bt6:hover::before, #bt7:hover::before, #bt8:hover::before, #bt9:hover::before, #bt10:hover::before, #bt11:hover::before, #bt12:hover::before, #bt13:hover::before, #bt14:hover::before, #bt15:hover::before{
+  left: calc(100% + 32px);
+  transition: 0.8s ease-in-out;
+}
+
+.input{
+  border: none;
+  border-radius: 5px;
+  background-color: rgb(241, 235, 226);
+}
+
+.label{
+  letter-spacing: 2px;
+}
+
+h2{
+  letter-spacing: 1px;
+}
+
+#bt3, #bt4{
+  background-color:  rgb(251, 146, 150);
+}
+
+@media only screen and (max-width: 600px){
+  ul{
+    font-size: 0.8rem;
+    flex-wrap: wrap;
+  }
+
+  #boutique{
+    font-size: 2.5rem;
+    margin-top: 1rem;
+  }
 }

@@ -27,12 +27,12 @@ const Accessories = (props) => {
 
 
     return (
-        // <div className="col">
-            <div className="card" style={{width: "18 rem"}} id="margin">
-                <h2>{props.accessories.store}</h2>
-                <img src={props.accessories.image} className="card-img-top" alt="..." onClick={showDescriptionAccessories}/>
+        <div className="col">
+            <div className="card border-danger" style={{maxWidth: "18 rem"}} id="margin">
+                <div class="card-header"><b>{props.accessories.store}</b></div>
+                <img src={props.accessories.image} id="animation" className="card-img-top" alt="..." onClick={showDescriptionAccessories}/>
                 <div className='card-body'>
-                    <h5 className="card-title" onClick={showDescriptionAccessories}>{props.accessories.name}</h5>
+                    <h4 className="card-title" onClick={showDescriptionAccessories}>{props.accessories.name}</h4>
 
                     {showInfoAccessories ? 
                     <div>
@@ -42,11 +42,11 @@ const Accessories = (props) => {
                       {props.accessories.like ? <><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f1/Heart_coraz%C3%B3n.svg/800px-Heart_coraz%C3%B3n.svg.png" alt="..." style={{width:"30px", height:"30px", marginBottom:"2%"}} onClick={() => {handleUpdateLikeAccessories(props.accessories)}}></img><br></br></> : <><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/03/Heart_empty_font_awesome.svg/2048px-Heart_empty_font_awesome.svg.png" alt="..." style={{width:"30px", height:"30px", marginBottom:"2%"}} onClick={() => {handleUpdateLikeAccessories(props.accessories)}}></img><br></br></>}
 
 
-                      <a href={props.accessories.link} className='btn btn-success'>Ready to Buy?</a>
-                      <button className='btn btn-danger' onClick={(event) => {
+                      <a href={props.accessories.link} className='btn btn-success' id="bt12">Ready to Buy?</a>
+                      <button className='btn btn-danger' id="bt5" onClick={(event) => {
                         props.handleDeleteAccessories(props.accessories)
                       }}>Delete</button>
-                      <button className='btn btn-info' data-bs-toggle="modal" data-bs-target={`#exampleModal${props.accessories._id}`}>Edit</button>
+                      <button className='btn btn-info' data-bs-toggle="modal" id="bt6" data-bs-target={`#exampleModal${props.accessories._id}`}>Edit</button>
                     </div> : <></>}
 
             {/* --------------- ACCESSORIES EDIT MODAL ------------------ */}
@@ -94,8 +94,8 @@ const Accessories = (props) => {
                               </form>
                             </div>
                             <div className="modal-footer">
-                              <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                              <button type="button" className="btn btn-primary" data-bs-dismiss="modal" onClick={(event) => {props.handleUpdateAccessorie(props.accessories)}}>Save changes</button>
+                              <button type="button" className="btn btn-secondary" id="bt7" data-bs-dismiss="modal">Close</button>
+                              <button type="button" className="btn btn-primary" id="bt8" data-bs-dismiss="modal" onClick={(event) => {props.handleUpdateAccessorie(props.accessories)}}>Save changes</button>
                             </div>
                           </div>
                         </div>
@@ -105,7 +105,7 @@ const Accessories = (props) => {
 
                 </div>
             </div>
-       // </div>
+        </div>
     )  
 
 }
