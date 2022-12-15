@@ -267,7 +267,7 @@ const getAccessories = () => {
 
   const handleSessionsDelete = (event) => {
     axios.delete(
-      'https://gentle-island-40061.herokuapp.com/sessions/', {withCredentials:true}
+      'https://gentle-island-40061.herokuapp.com/sessions', {withCredentials:true}
     ).then(() => {
       axios
         .get('https://gentle-island-40061.herokuapp.com/sessions/new')
