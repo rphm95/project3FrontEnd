@@ -1,28 +1,41 @@
 import React from 'react';
+import axios from 'axios';
 import {useState} from 'react';
 
 const Clothes = (props) => {
     const [showInfo, setShowInfo] = useState(false);
-    const [showEdit, setShowEdit] = useState(false)
 
     const showDescription = () => {
       setShowInfo(!showInfo)
     }
 
-    const getShowEdit = () => {
-      setShowEdit(!showEdit)
+    const handleUpdateLike = (clothesData) => {
+      axios
+          .put(`http://localhost:3000/boutique/${clothesData._id}`, 
+          {
+            like: !clothesData.like
+          }).then((response) => {
+            axios
+                .get('http://localhost:3000/boutique')
+                .then((response) => {
+                  props.setClothes(response.data)
+                })
+          })
     }
 
     return(
         <div className="col">
                 <div className="card" style={{width: "18 rem"}}>
                   <h2>{props.clothes.store}</h2>
-                  <img src={props.clothes.image} className="card-img-top img-thumbnail" onClick={showDescription}/>
+                  <img src={props.clothes.image} alt="..." className="card-img-top img-thumbnail" onClick={showDescription}/>
                   <div className='card-body'>
                     <h5 className="card-title" onClick={showDescription}>{props.clothes.name}</h5>
                     {showInfo ? <div>
                       <h5>{props.clothes.type}</h5>
                       <p className='card-text'>${props.clothes.price}</p>
+
+                      {props.clothes.like ? <><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f1/Heart_coraz%C3%B3n.svg/800px-Heart_coraz%C3%B3n.svg.png" alt="..." style={{width:"30px", height:"30px", marginBottom:"2%"}} onClick={() => {handleUpdateLike(props.clothes)}}/><br></br></> : <><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/03/Heart_empty_font_awesome.svg/2048px-Heart_empty_font_awesome.svg.png" alt="..." style={{width:"30px", height:"30px", marginBottom:"2%"}} onClick={() => {handleUpdateLike(props.clothes)}}/><br></br></>}
+
                       <a href={props.clothes.link} className='btn btn-success'>Ready to Buy?</a>
                       <button className='btn btn-danger' onClick={(event) => {
                         props.handleDelete(props.clothes)
