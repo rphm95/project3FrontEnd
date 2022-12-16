@@ -159,7 +159,7 @@ const getAccessories = () => {
   const handleNewClothes = (event) => {
     event.preventDefault()
     axios.post(
-      'https://quiet-cove-66596.herokuapp.com/boutique',
+      'http://localhost:3000/boutique',
       {
         name: newName,
         price: newPrice,
@@ -170,7 +170,7 @@ const getAccessories = () => {
       }
     ).then(() => {
       axios
-        .get('https://quiet-cove-66596.herokuapp.com/boutique')
+        .get('http://localhost:3000/boutique')
         .then((response) => {
           setClothes(response.data)
         })
@@ -208,7 +208,7 @@ const getAccessories = () => {
   const handleNewAccessorie = (event) => {
     event.preventDefault()
     axios.post(
-      'https://quiet-cove-66596.herokuapp.com/accessories',
+      'http://localhost:3000/accessories',
       {
         name: newAccessorieName,
         price: newAccessoriePrice,
@@ -219,7 +219,7 @@ const getAccessories = () => {
       }
     ).then(() => {
       axios
-        .get('https://quiet-cove-66596.herokuapp.com/accessories')
+        .get('http://localhost:3000/accessories')
         .then((response) => {
           setAccessories(response.data)
         })
@@ -231,14 +231,14 @@ const getAccessories = () => {
   // ===============
   const handleNewUser = (event) => {
     axios.post(
-      'https://quiet-cove-66596.herokuapp.com/users/new',
+      'http://localhost:3000/users/new',
       {
         username: newUser,
         password: newPassword
       }, {withCredentials:true}
     ).then(() => {
       axios
-        .get('https://quiet-cove-66596.herokuapp.com/users/new')
+        .get('http://localhost:3000/users/new')
         .then((response) => {
           console.log(response.data)
         })
@@ -249,14 +249,14 @@ const getAccessories = () => {
   const handleLogin = (event) => {
     event.preventDefault()
     axios.post(
-      'https://quiet-cove-66596.herokuapp.com/sessions/userLogin',
+      'http://localhost:3000/sessions/userLogin',
       {
         username: newUser,
         password: newPassword
       }, {withCredentials:true}
     ).then(() => {
       axios
-        .get('https://quiet-cove-66596.herokuapp.com/sessions/new', {withCredentials:true})
+        .get('http://localhost:3000/sessions/new', {withCredentials:true})
         .then((response) => {
           console.log(response.data)
           setUsers(response.data.username)
@@ -267,10 +267,10 @@ const getAccessories = () => {
 
   const handleSessionsDelete = (event) => {
     axios.delete(
-      'https://quiet-cove-66596.herokuapp.com/sessions/', {withCredentials:true}
+      'http://localhost:3000/sessions/', {withCredentials:true}
     ).then(() => {
       axios
-        .get('https://quiet-cove-66596.herokuapp.com/sessions/new')
+        .get('http://localhost:3000/sessions/new')
         .then((response) => {
           console.log(response)
           setUsers('')
@@ -312,7 +312,7 @@ const getAccessories = () => {
   const handleUpdate = (clothesData) => {
     axios
       .put(
-        `https://quiet-cove-66596.herokuapp.com/boutique/${clothesData._id}`,
+        `http://localhost:3000/boutique/${clothesData._id}`,
         {
           name: updatedName,
           price: updatedPrice,
@@ -323,7 +323,7 @@ const getAccessories = () => {
         }
       ).then((response) => {
         axios
-          .get('https://quiet-cove-66596.herokuapp.com/boutique')
+          .get('http://localhost:3000/boutique')
           .then((response) => {
             setClothes(response.data)
           })
@@ -359,7 +359,7 @@ const getAccessories = () => {
   const handleUpdateAccessorie = (accessoriesData) => {
     axios
       .put(
-        `https://quiet-cove-66596.herokuapp.com/accessories/${accessoriesData._id}`,
+        `http://localhost:3000/accessories/${accessoriesData._id}`,
         {
           name: updatedAccessorieName,
           price: updatedAccessoriePrice,
@@ -370,7 +370,7 @@ const getAccessories = () => {
         }
       ).then((response) => {
         axios
-          .get('https://quiet-cove-66596.herokuapp.com/accessories')
+          .get('http://localhost:3000/accessories')
           .then((response) => {
             // console.log(response.data)
             setAccessories(response.data)
@@ -383,10 +383,10 @@ const getAccessories = () => {
   // ===============================
   const handleDelete = (clothesData) => {
     axios
-        .delete(`https://quiet-cove-66596.herokuapp.com/boutique/${clothesData._id}`)
+        .delete(`http://localhost:3000/boutique/${clothesData._id}`)
         .then(() => {
           axios
-              .get('https://quiet-cove-66596.herokuapp.com/boutique')
+              .get('http://localhost:3000/boutique')
               .then((response) => {
                 setClothes(response.data)
               })
@@ -398,10 +398,10 @@ const getAccessories = () => {
   // ===============================
   const handleDeleteAccessories = (accessoriesData) => {
     axios
-        .delete(`https://quiet-cove-66596.herokuapp.com/accessories/${accessoriesData._id}`)
+        .delete(`http://localhost:3000/accessories/${accessoriesData._id}`)
         .then(() => {
           axios
-              .get('https://quiet-cove-66596.herokuapp.com/accessories')
+              .get('http://localhost:3000/accessories')
               .then((response) => {
                 setAccessories(response.data)
               })
@@ -412,18 +412,18 @@ const getAccessories = () => {
 
   useEffect(() => {
     axios
-      .get('https://quiet-cove-66596.herokuapp.com/accessories')
+      .get('http://localhost:3000/accessories')
       .then((response) => {
         // console.log(response.data)
         setAccessories(response.data)
       })
     axios
-      .get('https://quiet-cove-66596.herokuapp.com/boutique')
+      .get('http://localhost:3000/boutique')
       .then((response) => {
         setClothes(response.data)
       })
       axios
-      .get('https://quiet-cove-66596.herokuapp.com/sessions/new', {withCredentials:true})
+      .get('http://localhost:3000/sessions/new', {withCredentials:true})
       .then((response) => {
         setUsers(response.data.username)
         // console.log(response.data)
